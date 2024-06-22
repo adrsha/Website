@@ -7,10 +7,11 @@
   --tertiary: #6E7FA5;
 }
 
+
 body, html {
   padding: 0;
   margin: 0;
-  font-family: 'Quicksand', sans-serif;
+  background-color: var(--palewhite);
 }
 
 a {
@@ -20,4 +21,9 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+li {
+  list-style: none;
 }
