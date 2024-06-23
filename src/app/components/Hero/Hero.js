@@ -4,7 +4,8 @@ import HeroCarousel from "./HeroCarouselImg.js";
 import "./Hero.css";
 import { useState } from "react";
 
-const carouselIndex = new Array(3).fill(0).map((_, i) => i);
+const numOfCarousel = 3;
+const carouselIndex = new Array(numOfCarousel).fill(0).map((_, i) => i);
 
 export default function Hero() {
   const [pos, setPos] = useState(0);
@@ -39,8 +40,30 @@ export default function Hero() {
           <HeroCarousel pos={0 - pos} />
           <HeroCarousel pos={1 - pos} />
           <HeroCarousel pos={2 - pos} />
-          <span id="heroAdventPrev">←</span>
-          <span id="heroAdventNext">→</span>
+          <span
+            id="heroAdventPrev"
+            onClick={() => {
+              if (pos === 0) {
+                setPos(numOfCarousel - 1);
+                return;
+              }
+              return setPos((prevPos) => prevPos - 1);
+            }}
+          >
+            ￩
+          </span>
+          <span
+            id="heroAdventNext"
+            onClick={() => {
+              if (pos === numOfCarousel - 1) {
+                setPos(0);
+                return;
+              }
+              setPos((prevPos) => prevPos + 1);
+            }}
+          >
+            ￫
+          </span>
         </div>
         <span className="heroCarouselIndex">{carouselIndexEl}</span>
       </div>
