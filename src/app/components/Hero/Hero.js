@@ -1,5 +1,5 @@
 "use client";
-import "mathjs";
+//import "mathjs";
 import HeroCarousel from "./HeroCarouselImg.js";
 import "./Hero.css";
 import { useState } from "react";
