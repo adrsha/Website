@@ -1,4 +1,6 @@
 .hero {
+  --carousel-item-width: 35vw;
+  --carousel-item-height: 15vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,14 +40,13 @@
   justify-content: center;
   flex-direction: column;
 }
-
-.hero .hero-content h1 {
+.hero-content h1 {
   font-size: 2.5rem;
   font-weight: 400;
   color: var(--tertiary);
 }
 
-.hero .hero-content h1 > i{
+.hero-content h1 > i{
   background: linear-gradient(to right, var(--primary), var(--secondary));
   text-decoration: none;
   font-weight: 700;
@@ -62,7 +63,7 @@
   padding-left: 10vw;
 }
 
-.hero .hero-advert .hero-carousel-index {
+.hero-carousel-index {
   margin-right: 10vw;
   margin-left: 10vw;
   border-radius: 2vw;
@@ -75,7 +76,7 @@
   justify-content: center;
   gap: 1rem;
 }
-.hero .hero-advert .hero-carousel-index>li {
+.hero-carousel-index>li {
   height: 10px;
   aspect-ratio: 1/1;
   background-color: var(--primary);
@@ -83,14 +84,26 @@
   display: inline;
 }
 
-.hero .hero-advert .hero-carousel>li:nth-child(2) {
+.hero-carousel>li:nth-child(2) {
   background-color: var(--secondary);
 }
 
-.hero .hero-advert .hero-carousel {
+.hero-carousel {
   background: linear-gradient(to right, var(--primary), var(--secondary));
-  width: 30vw;
-  height: 15vw;
+  height: var(--carousel-item-height);
+  width: var(--carousel-item-width);
   border-radius: 2vw;
+  display: flex;
+  flex-direction: row;
+}
+.hero .hero-carousel .hero-carousel-item {
+  width: 100%;
+  height: var(--carousel-item-height);
+  width: var(--carousel-item-width);
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
