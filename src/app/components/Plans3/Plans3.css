@@ -3,42 +3,44 @@
     font-family: "Quicksand", sans-serif;
     display: flex;
     flex-direction: column;
+    padding: 5vw;
 }
 
 .heading {
     color: var(--primary);
     font-size: 5vh;
-    padding-left: 5vw;
-    padding-bottom: 6vh;
+    font-weight: bold;
+    padding-bottom: 1vh;
+    border-bottom: 1px solid var(--light);
 }
 
 .allThePlansContainer {
-    width: 100vw;
+    width: 90vw;
+    gap: 2vw;
     display: flex;
     align-items: stretch;
     justify-content: space-between;
+    padding-top: 7vh;
 }
 
 .plan {
     background-color: var(--background);
-    border-radius: .10px;
-    box-shadow: 0 .3vh .6vh var(--secondarya);
-    width: 25vw;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 1vw;
+    transition: 0.3s ease;
     display: flex;
     flex-direction: row;
 }
 
 .plan:hover {
     transform: translateY(-10px);
-    box-shadow: 0 .6vh 1vh var(--secondarya);
+    box-shadow: 0 .6vh 2vh 0.5vh var(--secondaryA);
 }
 
 .planHeader {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1.4vh;
-    color: #80A6ED;
+    color: var(--primary);
     min-width: 9.8vh;
 }
 
@@ -48,29 +50,27 @@
     align-items: flex-start;
     flex: 1;
     flex-direction: column;
-    padding: 1.4vh;
+    padding: 2vw;
     color: var(--tertiary);
 }
 
 .planText {
-    flex: 1;
     margin-right: 1vh;
 }
 
 .imageContainer {
     position: relative;
-    max-width: 10.5vw;
     flex: 1;
+    width: 5vw;
 }
 
 .imageContainer .planImg {
     width: 100%;
     height: 100%;
-    border-radius: 0vh;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    border-radius: .7vh .7vh .7vh .7vh;
+    border-radius: 1vw 1vw 1vw 1vw;
     position: relative;
 }
 
@@ -89,21 +89,31 @@
 .imageExtension {
     position: absolute;
     text-align: center;
-    top: 1.5vh;
-    padding: .5vh;
-    padding-bottom: 1.6vh;
+    top: 2vh;
+    padding: 1vh;
+    padding-bottom: 1.5vw;
     left: 50%;
     transform: translate(-50%, -100%);
+
     background-image: linear-gradient(to right, var(--primary), var(--secondary), var(--primary));
     background-size: 200% 100%;
     background-position: 0% 0%;
-    color: #ffffff;
+
+    color: var(--palewhite);
     font-size: 1rem;
+    font-weight: bold;
     width: 100%;
-    border-radius: .7vh;
+    border-radius: 1vw 1vw 0 0;
     transition: 0.25s;
 }
 
 .plan:hover .imageExtension {
     background-position: 100% 0%;
+}
+
+.showMore {
+    color: var(--primary);
+    font-size: 1rem;
+    text-decoration: none;
+    display: block;
 }

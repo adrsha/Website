@@ -13,6 +13,9 @@ export default function Plans3() {
                 This plan combines life insurance with a savings component,
                 providing a lump sum payout either upon the policyholder's death
                 or at the end of the policy term, whichever comes first.
+                <span className="showMore">
+                  <a href="#">Show More</a>
+                </span>
               </p>
             </div>
           </div>
@@ -29,6 +32,9 @@ export default function Plans3() {
                 This plan provides pure life insurance coverage for a specified
                 duration, offering a death benefit only if the insured person
                 passes away during the term of the policy.
+                <span className="showMore">
+                  <a href="#">Show More</a>
+                </span>
               </p>
             </div>
           </div>
@@ -46,6 +52,9 @@ export default function Plans3() {
                 the sum assured at regular intervals during the policy term,
                 along with a lump sum payout at maturity or upon the
                 policyholder's death.
+                <span className="showMore">
+                  <a href="#">Show More</a>
+                </span>
               </p>
             </div>
           </div>

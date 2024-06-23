@@ -2,11 +2,12 @@
   --carousel-item-width: 40vw;
   --carousel-item-height: 20vw;
   display: flex;
+  padding-top: 10vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  height: 100vh;
+  height: 60vh;
 }
 
 .heroContent {
