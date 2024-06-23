@@ -10,7 +10,7 @@
 }
 
 .hero-content {
-  flex:1.5;
+  flex: 1.5;
   display: flex;
   margin-left: 15vw;
   flex-direction: column;
@@ -19,7 +19,8 @@
   flex-direction: column;
   height: 100vh;
 }
-.hero-content button{
+
+.hero-content button {
   border: none;
   background: linear-gradient(to right, var(--primary), var(--secondary));
   color: var(--palewhite);
@@ -33,20 +34,21 @@
 }
 
 .hero-advert {
-  flex:1;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
+
 .hero-content h1 {
   font-size: 2.5rem;
   font-weight: 400;
   color: var(--tertiary);
 }
 
-.hero-content h1 > i{
+.hero-content h1>i {
   background: linear-gradient(to right, var(--primary), var(--secondary));
   text-decoration: none;
   font-weight: 700;
@@ -56,7 +58,7 @@
 }
 
 .hero .hero-advert {
-  flex:1;
+  flex: 1;
   display: flex;
   flex-direction: column;
   padding-right: 10vw;
@@ -76,6 +78,7 @@
   justify-content: center;
   gap: 1rem;
 }
+
 .hero-carousel-index>li {
   height: 10px;
   aspect-ratio: 1/1;
@@ -94,8 +97,10 @@
   width: var(--carousel-item-width);
   border-radius: 2vw;
   display: flex;
+  overflow: hidden;
   flex-direction: row;
 }
+
 .hero .hero-carousel .hero-carousel-item {
   width: 100%;
   height: var(--carousel-item-height);
@@ -106,4 +111,3 @@
   justify-content: center;
   align-items: center;
 }
-
