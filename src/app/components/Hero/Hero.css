@@ -94,6 +94,7 @@
   width: var(--carousel-item-width);
   border-radius: 2vw;
   display: flex;
+  overflow: hidden;
   flex-direction: row;
 }
 .hero .hero-carousel .hero-carousel-item {

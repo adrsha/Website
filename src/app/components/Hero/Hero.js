@@ -1,14 +1,10 @@
 import Image from "next/image";
 import "./Hero.css";
-import { viewportWidth, viewportHeight } from "./CarouselImages";
 
 export default function Hero() {
   const imageLoader = (width, height) => {
     return `https://picsum.photos/${width}/${height}`;
   };
-  console.log(viewportWidth, viewportHeight);
-  // const carouselSizeWidth = viewportWidth * 0.2;
-  // const carouselSizeHeight = viewportHeight * 0.4;
   const carouselSizeWidth = 1920 * 0.2;
   const carouselSizeHeight = 1080 * 0.4;
 
