@@ -28,12 +28,12 @@ export default function Footer(){
     })
 
     const followList= [
-        "fa-brands fa-square-facebook" ,
-        "fa-brands fa-linkedin" ,
-        "fa-brands fa-square-instagram" ]
+        "/icons8-facebook-24.png" ,
+        "/icons8-instagram-24.png" ,
+        "/icons8-linkedin-24.png" ]
     const followListArr= followList.map(listIcon =>{
         return (
-            <FontAwesomeIcon icon={listIcon} />
+            <img src={listIcon} style={{filter:'invert()'}}/>
         )
         })
 
@@ -46,6 +46,7 @@ export default function Footer(){
                             {resListArr}
                     </div>
                 </div>
+                <div id="marginDiv"></div>
                 <div id="contact">
                     <div id="contactInfo" className="contactEl">
                         <div id="contInfoContainer">
@@ -60,8 +61,11 @@ export default function Footer(){
                 </div>
                 <div></div>
             </div>
+            <div id="contentBr"></div>
             <div id="lowerContent">
-
+                <span>Some random Bullshits stihslluB modnar emoS</span>
+                <br/>
+                <span>© Copyright 2024-2024 insurancesathinepal.com. All Rights Reserved.</span>
             </div>
         </div>
     );
