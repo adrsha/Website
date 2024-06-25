@@ -3,7 +3,7 @@
     width: 100vw;
     display: flex;
     align-items: center;
-    background-color: var(--palewhite);
+    background-color: var(--palewhiteA);
     position: fixed;
     z-index: 9;
 
@@ -18,7 +18,6 @@
     height: 100%;
     display: flex;
     align-items: center;
-    background-color: var(--palewhite);
     justify-content: space-around;
 }
 .leftNav{

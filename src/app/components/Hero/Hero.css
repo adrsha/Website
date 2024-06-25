@@ -13,7 +13,7 @@
 .heroContent {
   flex:1.5;
   display: flex;
-  margin-left: 5vw;
+  padding-left: 10vw;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
