@@ -4,10 +4,11 @@
   --palewhite: #EFEFEF;
   --primary: #80A6ED;
   --secondary: #476DB3;
-  --secondaryA: #476db35e;
+  --secondaryA: #2C3951;
   --tertiary: #6E7FA5;
   --light: #A5BCE555;
   --background: #E1E5EE;
+  --elBackground: #293A8D
 }
 
 
@@ -26,6 +27,7 @@ a {
 * {
   box-sizing: border-box;
   font-family: 'Quicksand', sans-serif;
+  cursor: default;
 }
 
 li {

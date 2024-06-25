@@ -1,5 +1,5 @@
 "use client";
-// import "mathjs";
+
 import HeroCarousel from "./HeroCarouselImg.js";
 import "./Hero.css";
 import { useState } from "react";
@@ -32,6 +32,9 @@ export default function Hero() {
       <div className="heroContent">
         <h1>
           Find the <i>Best Insurance</i> plans for your needs
+        </h1>
+        <h1>
+          तपाईँको आवश्यकता अनुसार <i>उचित बीमा योजना</i> खोज्नुहोस्।
         </h1>
         <button>Compare Now</button>
       </div>

@@ -95,6 +95,7 @@
     --size: 6vh;
     display: flex;
     align-items: center;
+    cursor: pointer;
     justify-content: center;
     width: var(--size);
     aspect-ratio: 1;
@@ -118,31 +119,37 @@
 
 #optionsCard{
     padding: 1vh;
-    height: 80vh;
-    width: 20vw;
+    height: fit-content;
+    width: fit-content;
     position: absolute;
     top: 1.5vh;
     right: 4vw;
     z-index: 3;
-    background-color: rgba(53, 81, 135, 0.9);
+    background-color: var(--secondaryA);
+    font-weight: bold;
     border-radius: 1.3vh;
-    backdrop-filter: blur(px);
-    display: none;
+    backdrop-filter: blur(25px);
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
+
 .optionsOption{
+    transition: 0.5s ease;
     color: var(--palewhite);
+    width: 100%;
+    padding-left: 2vh;
+    padding-top: 1vh;
+    padding-right: 2vh;
+    padding-bottom: 1vh;
     display: flex;
     flex:1;
     align-items: center;
-    width: 100%;
-    justify-content: left;
+    justify-content: flex-start;
+    white-space: nowrap;
     border-radius: 2vh;
-    padding-left: 1vh;
-    padding-right: 1vh;
 }
+
 #emptySpace{
     height: 6vh;
     width: 100%;
@@ -152,7 +159,7 @@
 }
 .optionImgContainer{
     aspect-ratio: 1;
-    width: 1vh;
+    height: 3vh;
     display: flex;
     flex: 1;
 }
@@ -162,3 +169,44 @@
 .divElements{
     margin: 1vh;
 }
+
+.hidden{
+  animation-name: slideOut;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  transform: translateX(10vw);
+}
+
+.visible{
+  animation-name: slideIn;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  transform: translateX(-10vh);
+}
+
+@keyframes slideOut {
+  from{
+    display: block;
+    opacity: 1;
+    transform: translateX(-10vh);
+  }
+  to{
+    opacity: 0;
+    transform: translateX(10vw);
+    display: none;
+  }
+}
+
+@keyframes slideIn {
+  from{
+    display: block;
+    opacity: 0;
+    transform: translateX(10vw);
+  }
+  to{
+    display: block;
+    opacity: 1;
+    transform: translateX(-10vh);
+  }
+}
+

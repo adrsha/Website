@@ -38,7 +38,8 @@ export default function Nav() {
         moreOptions.children[2].style.rotate = "-45deg";
         moreOptions.children[2].style.transform = "translate(0, -1.6vh)";
         toggleNum = 0;
-        optionsCard.style.display = "flex";
+        optionsCard.classList.add("visible");
+        optionsCard.classList.remove("hidden");
       } else {
         moreOptions.children[0].style.rotate = "0deg";
         moreOptions.children[0].style.transform = "translate(0, 0vh)";
@@ -46,7 +47,8 @@ export default function Nav() {
         moreOptions.children[2].style.rotate = "0deg";
         moreOptions.children[2].style.transform = "translate(0, 0vh)";
         toggleNum = 1;
-        optionsCard.style.display = "none";
+        optionsCard.classList.remove("visible");
+        optionsCard.classList.add("hidden");
       }
     });
   });
@@ -75,11 +77,7 @@ export default function Nav() {
           </div>
         </div>
       </div>
-      <div id="optionsCard">
-        <div id="emptySpace">
-          <div className="optionImgContainer divElements"></div>
-        </div>
-
+      <div id="optionsCard" className="hidden">
         <div id="homeOption" className="optionsOption">
           <div className="optionImgContainer divElements">
             <img src="/Home Page.png" alt="" />
