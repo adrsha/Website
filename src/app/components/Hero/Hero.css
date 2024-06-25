@@ -13,7 +13,7 @@
 .heroContent {
   flex:1.5;
   display: flex;
-  margin-left: 15vw;
+  margin-left: 5vw;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
@@ -27,18 +27,20 @@
   background-size: 200% 200%;
   background-position: 0% 50%;
   color: var(--palewhite);
-  font-size: 1.5rem;
-  transition: background-position 0.5s ease-in-out;
+  font-size: 1rem;
+  transition: 0.2s ease-in-out;
   font-weight: 700;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
   border-radius: 1rem;
 }
 
 .heroContent button:hover{
   background-position: 100% 50%;
+  transform: translate(0%, -1vh);
+  box-shadow: 0 1vh 2vh var(--secondaryA);
 }
 
 .heroAdvert {
@@ -80,7 +82,7 @@
 }
 
 .heroContent h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 400;
   color: var(--tertiary);
 }

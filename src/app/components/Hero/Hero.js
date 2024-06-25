@@ -33,6 +33,9 @@ export default function Hero() {
         <h1>
           Find the <i>Best Insurance</i> plans for your needs
         </h1>
+        <h1>
+          तपाईँको आवश्यकता अनुसार <i>उचित बीमा योजना</i> खोज्नुहोस्।
+        </h1>
         <button>Compare Now</button>
       </div>
       <div className="heroAdvert">
