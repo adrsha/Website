@@ -76,6 +76,7 @@
     align-items: center;
     justify-content: space-around;
 }
+
 .contactEl{
     margin-top: 1vh;
     margin-bottom: 1vh;
@@ -83,6 +84,7 @@
     font-size: small;
     color: var(--palewhite);
 }
+
 #lowerContent{
     display: flex;
     flex-direction: column;
