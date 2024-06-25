@@ -39,7 +39,7 @@ export default function Plans3() {
             </div>
           </div>
           <div className="imageContainer">
-            <div className="imageExtension">Early payout</div>
+            <div className="imageExtension">Cheapest</div>
             <div className="planImg" id="termlifephoto"></div>
           </div>
         </div>
