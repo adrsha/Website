@@ -125,9 +125,6 @@ export default function Reviews() {
         return (index - step + reviews.length) % reviews.length;
     };
 
-
-
-
     const handleLeftArrowClick = () => {
         setFade("fade-out-right");
         setTimeout(() => {
@@ -137,6 +134,7 @@ export default function Reviews() {
             });
             setFade("fade-in-left");
         }, 500); // Duration of the fade-out animation
+        setTimeout(() => setFade(""), 1000); // Reset fade state after animations
         resetTimer();
     };
 
@@ -149,9 +147,9 @@ export default function Reviews() {
             });
             setFade("fade-in-right");
         }, 500); // Duration of the fade-out animation
+        setTimeout(() => setFade(""), 1000); // Reset fade state after animations
         resetTimer();
     };
-
 
     const resetTimer = () => {
         if (timerRef.current) {
@@ -206,19 +204,6 @@ export default function Reviews() {
         </div>
     );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
