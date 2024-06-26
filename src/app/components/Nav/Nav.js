@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useEffect } from "react";
 import "./Nav.css";
 
@@ -55,7 +56,9 @@ export default function Nav() {
   return (
     <nav id="navBar-container">
       <div id="navBar">
-        <div className="sideNav leftNav"></div>
+        <div className="sideNav leftNav">
+          <div className="logo"></div>
+        </div>
         <div className="sideNav rightNav">
           <div className="navItem">
             <div id="themeContainer">

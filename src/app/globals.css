@@ -2,13 +2,15 @@
 
 :root {
   --palewhite: #EFEFEF;
+  --palewhiteA: #EFEFEF5e;
   --primary: #80A6ED;
   --secondary: #476DB3;
-  --secondaryA: #2C3951;
+  --secondaryA: #476db35e;
   --tertiary: #6E7FA5;
   --light: #A5BCE555;
   --background: #E1E5EE;
-  --elBackground: #293A8D
+  --elBackground: #374D83;
+  --darker-secondary: #123563;
 }
 
 
