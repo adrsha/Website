@@ -1,7 +1,8 @@
 #footerContainer{
     height: 60vh;
     width: 100vw;
-    background-color: var(--secondary);
+    background-color: var(--elBackground);
+    /* font-weight: bold; */
     display: flex;
     flex-direction: column;
 
@@ -43,6 +44,8 @@
     border-radius: 0.5vh;
 }
 
+#resourceCard h3 {
+}
 
 .resText{
     margin-bottom: 1em;

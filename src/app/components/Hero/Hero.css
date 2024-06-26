@@ -72,13 +72,14 @@
   align-items: center;
   justify-content: center;
 }
+
 .heroAdvert span#heroAdventPrev{
   left: 0;
-  background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
+  background: linear-gradient(to right, var(--light), transparent);
 }
 .heroAdvert span#heroAdventNext{
   right: 0;
-  background: linear-gradient(to right, transparent, rgba(0,0,0,0.4));
+  background: linear-gradient(to right, transparent, var(--light));
 }
 
 .heroContent h1 {
@@ -100,8 +101,8 @@
   flex:1;
   display: flex;
   flex-direction: column;
-  padding-right: 10vw;
-  padding-left: 10vw;
+  margin-right: 10vw;
+  margin-left: 10vw;
 }
 
 .heroCarouselIndex {
@@ -154,4 +155,8 @@
   overflow: hidden;
   transition: transform 0.5s ease-in-out;
   position: absolute;
+}
+.heroCarouselItem > img{
+  object-fit: cover;
+  opacity: 0.6;
 }
