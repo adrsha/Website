@@ -3,21 +3,30 @@ import React, { useEffect } from "react";
 import "./Footer.css"
 export default function Footer(){
 
-    const resList=['Calculator',
-        'Article',
+    const resList=['Insured Ammount Calculator',
+        'Term Completion Finder',
+        'Payout lasting Calculator',
+        'Articles',
         'List of all life policies',
-        'list of all companies',
+        'List of all companies']
+    const resListArr= resList.map(listText =>{
+    return (
+    <li className="resText">{listText}</li>
+    )
+    })
+    const otherList=[
+        'About us',
         'Privacy policy',
         'Terms and conditions',
-        'Site map',
-        'About us']
-    const resListArr= resList.map(listText =>{
+        'Site map']
+    const otherListArr= otherList.map(listText =>{
     return (
     <li className="resText">{listText}</li>
     )
     })
 
     const contactInfo=['Bafal, Kathmandu',
+        'Locate us Here',
         '+977-982137877123124124',
         'Click to Email Us',
         'Sun-Fri 9:00AM - 06:00PM']
@@ -44,6 +53,8 @@ export default function Footer(){
                     <div id="resourcesCard">
                             <h3 className="resText">Resources</h3>
                             {resListArr}
+                            <h3 className="resText">Others</h3>
+                            {otherListArr}
                     </div>
                 </div>
                 <div id="marginDiv"></div>
