@@ -125,6 +125,26 @@ export default function Reviews() {
         return (index - step + reviews.length) % reviews.length;
     };
 
+
+    // const handleLeftArrowClick = () => {
+    //     setFade("fade-out-right");
+    //     setTimeout(() => {
+    //         setCurrentIndex((prevIndex) => getPreviousIndex(prevIndex, batchCount));
+    //         setFade("fade-in-left");
+    //     }, 50); // Minimal delay for fade-out to start before fade-in
+    //     resetTimer();
+    // };
+    
+    // const handleRightArrowClick = () => {
+    //     setFade("fade-out-left");
+    //     setTimeout(() => {
+    //         setCurrentIndex((prevIndex) => getNextIndex(prevIndex, batchCount));
+    //         setFade("fade-in-right");
+    //     }, 50); // Minimal delay for fade-out to start before fade-in
+    //     resetTimer();
+    // };
+    
+    
     const handleLeftArrowClick = () => {
         setFade("fade-out-right");
         setTimeout(() => {
@@ -133,7 +153,7 @@ export default function Reviews() {
                 return newIndex;
             });
             setFade("fade-in-left");
-        }, 500); // Duration of the fade-out animation
+        }, 200); // Duration of the fade-out animation
         setTimeout(() => setFade(""), 1000); // Reset fade state after animations
         resetTimer();
     };
@@ -146,7 +166,7 @@ export default function Reviews() {
                 return newIndex;
             });
             setFade("fade-in-right");
-        }, 500); // Duration of the fade-out animation
+        }, 200); // Duration of the fade-out animation      
         setTimeout(() => setFade(""), 1000); // Reset fade state after animations
         resetTimer();
     };

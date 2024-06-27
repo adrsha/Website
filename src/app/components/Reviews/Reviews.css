@@ -56,10 +56,10 @@
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-    padding-top: 7vh;
     flex-wrap: nowrap;
-    overflow: hidden;
     position: relative;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
