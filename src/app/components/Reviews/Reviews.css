@@ -3,7 +3,6 @@
     font-family: "Quicksand", sans-serif;
     display: flex;
     flex-direction: column;
-    padding: 5vw;
 }
 
 .heading {
@@ -18,6 +17,7 @@
 
 .headingTitle {
     flex: 10;
+    margin-left: 3vw;
     text-align: left;
 }
 
@@ -61,6 +61,7 @@
     overflow: hidden;
     position: relative;
     transition: opacity 0.5s ease, transform 0.5s ease;
+    padding: 5vw;
 }
 
 .fade-out-left {
