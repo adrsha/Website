@@ -18,7 +18,6 @@
 
 .headingTitle {
     flex: 10;
-    text-align: left;
 }
 
 .arrow {
@@ -126,7 +125,7 @@
 }
 
 .review:hover {
-    transform: translateY(-.7vh);
+    transform: translateY(-10px);
     box-shadow: 0 .6vh 2vh 0.5vh var(--secondaryA);
 }
 

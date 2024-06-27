@@ -63,7 +63,7 @@ export default function Footer(){
             </div>
             <div id="contentBr"></div>
             <div id="lowerContent">
-                <span>Visitors are hereby informed that their information submitted on the website may be shared with insurers.Product information is authentic and solely based on the information received from the insurers.</span>
+                <span>Some random Bullshits stihslluB modnar emoS</span>
                 <br/>
                 <span>© Copyright 2024-2024 insurancesathinepal.com. All Rights Reserved.</span>
             </div>
