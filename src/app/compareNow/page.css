@@ -38,6 +38,8 @@
 
 #datafields {
   width: 80vw;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
 }
 
 #datafieldLeft {
@@ -80,12 +82,43 @@ span#gender {
   width: 100vw;
 }
 
+div.surrounddatafields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
 #contentChoose {
   width: 30%;
   height: 10vh;
-  background-color: gray;
+  background-color: var(--palewhite);
+  border-radius: 0.5vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  color: var(--secondary);
+  position: relative;
+}
+
+#contentChoose div {
+  min-width: fit-content;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
+  font-weight: bold;
+  position: relative;
+}
+
+#contentChoose #selectPanel {
+  height: 70%;
+  width: 33%;
+  border-radius: 0.5vw;
+  background-color: var(--primary);
+  position: absolute;
+  left: 0;
+  z-index: 0;
+}
+
+#contentChoose #contentChooseCurrent {
   color: var(--palewhite);
 }
