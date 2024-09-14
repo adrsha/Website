@@ -40,8 +40,10 @@ export default function Compare() {
             />
           </div>
           <div id="datafieldRight">
-            <input type="radio" name="gender" value="Male" /> Male
-            <input type="radio" name="gender" value="Female" /> Female
+            <span id="gender">
+              <input type="radio" name="gender" value="Male" /> Male
+              <input type="radio" name="gender" value="Female" /> Female
+            </span>
             <input type="text" placeholder="Age" id="ageField" />
             <input
               type="text"
@@ -54,9 +56,7 @@ export default function Compare() {
               id="occupationField"
               className="optional"
             />
-            <button id="compareButton" type="submit">
-              Compare
-            </button>
+            <button id="mainButton">Compare</button>
           </div>
         </form>
 
