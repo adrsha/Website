@@ -1,50 +1,83 @@
-#compareContainer{
-    padding-top: 10vh;
-    top: 20vh;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+:root {
+  --margin-right: 20vw;
 }
-.compareContents{
-    width: 80vw;
-    display: flex;
-    background-color: var(--palewhite);
+
+#compareContainer {
+  padding-top: 10vh;
+  top: 20vh;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-#searchPlans{
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    padding-left: 2vw;
-    align-items: first baseline;
+
+.compareContents {
+  width: 80vw;
+  display: flex;
+  background-color: var(--palewhite);
 }
-#searchPlans h1 span{
-    margin-left: 0.5vw;
-    margin-right: 0.5vw;
+
+#searchPlans {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: first baseline;
 }
-#searchSpan{
-    color: var(--primary);
+
+#searchSpan {
+  color: var(--primary);
 }
-#planSpan{
-    color: var(--secondary);
+
+#planSpan {
+  margin-left: 0.5vw;
+  color: var(--secondary);
 }
-#datafields{
-    width: 80vw;
-    height: 85vh;
-    background-color: blue;
+
+#datafields {
+  width: 80vw;
 }
-#chooseBreak{
-    height: 0.1px;
-    width: 100vw;
+
+#datafieldLeft {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-right: var(--margin-right);
+  gap: 1vw;
+  justify-content: space-around;
+  align-items: flex-start;
 }
-#contentChoose{
-    width: 30%;
-    height: 10vh;
-    background-color: gray;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    color: var(--palewhite);
+
+#datafieldLeft input,
+#datafieldRight input {
+  border: none;
+  padding: 0.2vw;
+  width: 80%;
+}
+
+#datafieldRight {
+  width: 50%;
+  gap: 1vw;
+  display: flex;
+  margin-left: calc(var(--margin-right) * -1);
+  margin-right: var(--margin-right);
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#chooseBreak {
+  height: 0.1px;
+  width: 100vw;
+}
+
+#contentChoose {
+  width: 30%;
+  height: 10vh;
+  background-color: gray;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--palewhite);
 }

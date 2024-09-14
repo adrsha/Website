@@ -17,10 +17,48 @@ export default function Compare() {
           </p>
         </div>
 
-        <div className="compareContents" id="datafields">
-          <div id="datafieldLeft"></div>
-          <div id="datafieldRight"></div>
-        </div>
+        <form className="compareContents" id="datafields">
+          <div id="datafieldLeft">
+            <input
+              type="text"
+              placeholder="Name"
+              id="nameField"
+              className="optional"
+            />
+            <input type="text" placeholder="Date Of Birth" id="dobField" />
+            <input
+              type="text"
+              placeholder="Insured Ammount"
+              id="insuredAmmountField"
+            />
+            <input type="text" placeholder="Income" id="incomeField" />
+            <input
+              type="text"
+              placeholder="Phone Number"
+              id="phoneField"
+              className="optional"
+            />
+          </div>
+          <div id="datafieldRight">
+            <input type="radio" name="gender" value="Male" /> Male
+            <input type="radio" name="gender" value="Female" /> Female
+            <input type="text" placeholder="Age" id="ageField" />
+            <input
+              type="text"
+              placeholder="Insured Term"
+              id="insuredTermField"
+            />
+            <input
+              type="text"
+              placeholder="Occupation"
+              id="occupationField"
+              className="optional"
+            />
+            <button id="compareButton" type="submit">
+              Compare
+            </button>
+          </div>
+        </form>
 
         <div id="chooseBreak"></div>
 
