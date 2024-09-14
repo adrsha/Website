@@ -15,6 +15,7 @@ export default function Compare() {
             features and benefits of each of our plans below. Compare and select
             the plan that suits you best.
           </p>
+
         </div>
 
         <div className="surrounddatafields">
