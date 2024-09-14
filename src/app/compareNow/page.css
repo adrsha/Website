@@ -33,11 +33,12 @@
 
 
 
-#searchPlans > p{
+#searchPlans>p {
   font-size: 1.5rem;
   color: var(--tertiary);
   font-weight: 600;
 }
+
 #searchSpan {
   color: var(--primary);
   font-size: var(--heading-font-size);
@@ -58,12 +59,13 @@
   align-items: flex-start;
 }
 
-#datafieldLeft input,
-#datafieldRight input {
+#datafieldLeft input[type="text"],
+#datafieldRight input[type="text"] {
   border: none;
   padding: 0.5vw;
+  border-radius: 0.5vw;
   width: 80%;
-  
+
 }
 
 #datafieldRight {
@@ -75,6 +77,7 @@
   align-items: flex-start;
 }
 
+span#type,
 span#gender {
   display: flex;
   flex-direction: row;
