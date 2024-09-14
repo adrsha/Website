@@ -17,92 +17,48 @@ export default function Compare() {
           </p>
         </div>
 
-        <div className="surrounddatafields">
-          <form className="compareContents" id="endowmentdatafields">
-            <div id="datafieldLeft">
-              <input
-                type="text"
-                placeholder="Name"
-                id="nameField"
-                className="optional"
-              />
-              <input type="text" placeholder="Date Of Birth" id="dobField" />
-              <input
-                type="text"
-                placeholder="Insured Ammount"
-                id="insuredAmmountField"
-              />
-              <input type="text" placeholder="Income" id="incomeField" />
-              <input
-                type="text"
-                placeholder="Phone Number"
-                id="phoneField"
-                className="optional"
-              />
-            </div>
-            <div id="datafieldRight">
-              <span id="gender">
-                <input type="radio" name="gender" value="Male" /> Male
-                <input type="radio" name="gender" value="Female" /> Female
-              </span>
-              <input type="text" placeholder="Age" id="ageField" />
-              <input
-                type="text"
-                placeholder="Insured Term"
-                id="insuredTermField"
-              />
-              <input
-                type="text"
-                placeholder="Occupation"
-                id="occupationField"
-                className="optional"
-              />
-              <button id="mainButton">Compare</button>
-            </div>
-          </form>
-          <form className="compareContents" id="termlifedatafields">
-            <div id="datafieldLeft">
-              <input
-                type="text"
-                placeholder="Name"
-                id="nameField"
-                className="optional"
-              />
-              <input type="text" placeholder="Date Of Birth" id="dobField" />
-              <input
-                type="text"
-                placeholder="Insured Ammount"
-                id="insuredAmmountField"
-              />
-              <input type="text" placeholder="Income" id="incomeField" />
-              <input
-                type="text"
-                placeholder="Phone Number"
-                id="phoneField"
-                className="optional"
-              />
-            </div>
-            <div id="datafieldRight">
-              <span id="gender">
-                <input type="radio" name="gender" value="Male" /> Male
-                <input type="radio" name="gender" value="Female" /> Female
-              </span>
-              <input type="text" placeholder="Age" id="ageField" />
-              <input
-                type="text"
-                placeholder="Insured Term"
-                id="insuredTermField"
-              />
-              <input
-                type="text"
-                placeholder="Occupation"
-                id="occupationField"
-                className="optional"
-              />
-              <button id="mainButton">Compare</button>
-            </div>
-          </form>
-        </div>
+        <form className="compareContents" id="datafields">
+          <div id="datafieldLeft">
+            <input
+              type="text"
+              placeholder="Name"
+              id="nameField"
+              className="optional"
+            />
+            <input type="text" placeholder="Date Of Birth" id="dobField" />
+            <input
+              type="text"
+              placeholder="Insured Ammount"
+              id="insuredAmmountField"
+            />
+            <input type="text" placeholder="Income" id="incomeField" />
+            <input
+              type="text"
+              placeholder="Phone Number"
+              id="phoneField"
+              className="optional"
+            />
+          </div>
+          <div id="datafieldRight">
+            <span id="gender">
+              <input type="radio" name="gender" value="Male" /> Male
+              <input type="radio" name="gender" value="Female" /> Female
+            </span>
+            <input type="text" placeholder="Age" id="ageField" />
+            <input
+              type="text"
+              placeholder="Insured Term"
+              id="insuredTermField"
+            />
+            <input
+              type="text"
+              placeholder="Occupation"
+              id="occupationField"
+              className="optional"
+            />
+            <button id="mainButton">Compare</button>
+          </div>
+        </form>
 
         <div id="chooseBreak"></div>
 
