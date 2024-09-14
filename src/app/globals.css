@@ -35,10 +35,11 @@ a {
 li {
   list-style: none;
 }
-.mainButton{
+
+.mainButton {
   cursor: pointer;
   border: none;
-  background: linear-gradient(to right, var(--primary), var(--secondary),  var(--primary));
+  background: linear-gradient(to right, var(--primary), var(--secondary), var(--primary));
   background-size: 200% 200%;
   background-position: 0% 50%;
   color: var(--palewhite);
@@ -52,12 +53,8 @@ li {
   border-radius: 1rem;
 }
 
-.mainButton:hover{
+.mainButton:hover {
   background-position: 100% 50%;
   transform: translate(0%, -1vh);
   box-shadow: 0 1vh 2vh var(--secondaryA);
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> d405fe9 (feat: new things in compare)
