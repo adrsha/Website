@@ -1,5 +1,6 @@
 'use client';
 import "./page.css";
+<<<<<<< HEAD
 import { Children } from "react";
 import { useEffect, useState } from 'react';
 export default function Compare() {
@@ -48,6 +49,16 @@ export default function Compare() {
       });
     }
     }
+=======
+import fs from 'fs';
+import path from 'path';
+export default function Compare() {
+  const fPath= path.join(process.cwd(),'public','lic', 'endowment.csv');
+  const csvdata = fs.readFileSync(fPath, 'utf-8');
+  const rows = csvdata.split('/n');
+  const parsedData = rows.map(row=>row.split(','));
+  console.log(parsedData)
+>>>>>>> daa1ac8 (chore: new things in compare)
   return (
     <>
       <div id="compareContainer">
