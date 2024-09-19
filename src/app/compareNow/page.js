@@ -1,6 +1,5 @@
 'use client';
 import "./page.css";
-<<<<<<< HEAD
 import { Children } from "react";
 import { useEffect, useState } from 'react';
 export default function Compare() {
@@ -15,13 +14,24 @@ export default function Compare() {
     insuredTerm: '',
     occupation: '',
   });
+  const [csvData, setCsvData] = useState([]);
+  const [comparisonResult, setComparisonResult] = useState('');
 
   useEffect(()=>{
     console.log(formData)
+    const formDataArray = Object.values(formData);
+    
+    // Compare formData with csvData
+    const match = csvData.find(row => 
+      row.every((value, index) => value === formDataArray[index]))
+      if (match) {
+        setComparisonResult('Match found in CSV!');
+      } else {
+        setComparisonResult('No match found in CSV.');
+      }
   }, [formData]);
 
   function convertToCSV(data) {
-    console.log("button pressed!")
     const nameElement = document.getElementById('nameField');
     if (nameElement) {
       // Retrieve the parent elements and their children correctly
@@ -46,19 +56,17 @@ export default function Compare() {
         age,
         insuredTerm,
         occupation,
-      });
+      });  
+      fetch('public/lic/Endowment/tabrate.csv')
+      .then(response => response.text())
+      .then(text => {
+        const rows = text.split('\n').map(row => row.split(','));
+        setCsvData(rows);
+      });    
     }
+
+
     }
-=======
-import fs from 'fs';
-import path from 'path';
-export default function Compare() {
-  const fPath= path.join(process.cwd(),'public','lic', 'endowment.csv');
-  const csvdata = fs.readFileSync(fPath, 'utf-8');
-  const rows = csvdata.split('/n');
-  const parsedData = rows.map(row=>row.split(','));
-  console.log(parsedData)
->>>>>>> daa1ac8 (chore: new things in compare)
   return (
     <>
       <div id="compareContainer">
