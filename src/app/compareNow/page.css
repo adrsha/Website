@@ -33,7 +33,7 @@
 
 
 
-#searchPlans>p {
+.fattext {
   font-size: 1.5rem;
   color: var(--tertiary);
   font-weight: 600;
@@ -65,7 +65,6 @@
   padding: 0.5vw;
   border-radius: 0.5vw;
   width: 80%;
-
 }
 
 #datafieldRight {
@@ -83,6 +82,32 @@ span#gender {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  position: relative;
+  margin-bottom: 1vw;
+  color: var(--secondaryA);
+  font-weight: bold;
+}
+
+span#gender::before {
+  content: "Gender";
+}
+
+span#type::before {
+  content: "Type";
+}
+
+span#gender::before,
+span#type::before {
+  position: absolute;
+  font-weight: bold;
+  font-size: 1.5rem;
+  width: 100%;
+  transform: translateY(-100%);
+  color: var(--tertiary);
+}
+
+input[type="radio"] {
+  margin-right: 0.5vw;
 }
 
 #chooseBreak {
