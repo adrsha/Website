@@ -1,0 +1,8 @@
+Minentry,18
+Maxentry,55
+Mintime,5
+Maxtime,<=70minusAge
+Mininsured,20000
+Maxinsured,8*salary
+Insuredincrement,1000
+time,15,20,25
