@@ -3,5 +3,5 @@ Maxentry,60
 Mintime,5
 Maxtime,70minusAge
 Mininsured,10000
-Maxinsured,8salary
+Maxinsured,8*salary
 Insuredincrement,1000

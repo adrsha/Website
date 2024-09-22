@@ -125,7 +125,6 @@ export default function Compare() {
                 <input type="radio" name="type" value="TermLife" /> Term Life
                 <input type="radio" name="type" value="MoneyBack" /> Money Back
               </span>
-              <input type="text" placeholder="Age" id="ageField" />
               <input
                 type="text"
                 placeholder="Insured Term"
