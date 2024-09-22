@@ -2,6 +2,9 @@
 import "./page.css";
 import { Children } from "react";
 import { useEffect, useState } from "react";
+import filter from "./comparision/filter.js"
+import papa from "papaparse"
+import { row } from "mathjs";
 export default function Compare() {
   const [formData, setFormData] = useState({
     name: "",
@@ -16,37 +19,86 @@ export default function Compare() {
   const [csvData, setCsvData] = useState([]);
   const [comparisonResult, setComparisonResult] = useState("");
 
+  // runs at start; used to fetch and parse csv file
   useEffect(() => {
-    const formDataArray = Object.values(formData);
+    let term=document.getElementById("preselect")
+    term.click()
+    fetch('/lic/Endowment/parameters.csv')
+      .then(response => response.text())
+      .then(csvText => {
+        const result = papa.parse(csvText, { header: false });
+        setCsvData(result.data);
+      })
+      .catch(error => console.error('Error fetching CSV:', error));
+  }, []);
 
-    // Compare formData with csvData
-    const match = csvData.find((row) =>
-      row.every((value, index) => value === formDataArray[index]),
+  //activates each time csvData fetch from file and formData from user changes
+    useEffect(() => {
+    //console.log("hello");
+     //console.log(formData);
+     filter(formData)
+    // console.log(csvData, "csv data")
+
+    if (csvData.length > 0) {
+      compareFormWithCSV();
+    }
+
+  }, [formData, csvData]);
+
+  //just simple fxn to calculate age from date
+  function calculateAge(dob) {
+    const birthDate = new Date(dob);
+    const today = new Date();
+    
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+  
+    // Adjust age if the birthday hasn't occurred yet this year
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+  
+    return age;
+  }
+
+  //compares the formData with csvData
+  const compareFormWithCSV = () => {
+    //console.log(csvData)
+    const match = csvData.find(row => 
+      console.log(row)
+      //row[1]<formData.age
+      // row.dob === formData.dob &&
+      // row.insuredAmount === formData.insuredAmount &&
+      // row.income === formData.income &&
+      // row.phoneNumber === formData.phoneNumber &&
+      // row.age === formData.age &&
+      // row.insuredTerm === formData.insuredTerm &&
+      // row.occupation === formData.occupation &&
+      // row.gender === formData.gender
     );
+
     if (match) {
       setComparisonResult("Match found in CSV!");
     } else {
       setComparisonResult("No match found in CSV.");
     }
-  }, [formData]);
-
+  };
   function convertToCSV(data) {
     const nameElement = document.getElementById("nameField");
-    if (nameElement != "") {
+    const dob = nameElement.parentElement.children[1].value;
+    const insuredAmount = nameElement.parentElement.children[2].value;
+    const income = nameElement.parentElement.children[3].value;
+    const insuredTerm = nameElement.parentElement.parentElement.children[1].children[2].value;
+    const gender = document.querySelector(
+      'input[name="gender"]:checked',
+    )?.value;
+    if (nameElement.value!="" && dob!="" && insuredAmount!="" && income!="" && insuredAmount!="" && gender!="") {
       // Retrieve the parent elements and their children correctly
-      const dob = nameElement.parentElement.children[1].value;
-      const insuredAmount = nameElement.parentElement.children[2].value;
-      const income = nameElement.parentElement.children[3].value;
       const phoneNumber = nameElement.parentElement.children[4].value;
       const age =
         nameElement.parentElement.parentElement.children[1].children[1].value;
-      const insuredTerm =
-        nameElement.parentElement.parentElement.children[1].children[2].value;
       const occupation =
         nameElement.parentElement.parentElement.children[1].children[3].value;
-      const gender = document.querySelector(
-        'input[name="gender"]:checked',
-      )?.value;
 
       // Update the state with form data
       setFormData({
@@ -60,7 +112,29 @@ export default function Compare() {
         insuredTerm,
         occupation,
       });
-      console.log(formData);
+      saveUserData(formData);
+    }
+  }
+
+
+  async function saveUserData(data) {
+    try {
+      const response = await fetch('/api/saveUserData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log(response.json())
+      } else {
+        const errorText = await response.text();
+      }
+    } catch (error) {
+      console.error('Error saving data:', error);
     }
   }
   return (
@@ -89,16 +163,20 @@ export default function Compare() {
                 id="nameField"
                 className="optional"
               />
-              <input type="text" placeholder="Date Of Birth" id="dobField" />
               <input
                 type="text"
-                placeholder="Insured Ammount"
+                placeholder="Insured Term"
+                id="insuredTermField"
+              />
+              <input
+                type="text"
+                placeholder="Insured Amount"
                 id="insuredAmmountField"
               />
               <input type="text" placeholder="Income" id="incomeField" />
               <input
                 type="text"
-                placeholder="Phone Number"
+                placeholder="Phone Number(optional)"
                 id="phoneField"
                 className="optional"
               />
@@ -125,18 +203,21 @@ export default function Compare() {
                 <input type="radio" name="type" value="TermLife" /> Term Life
                 <input type="radio" name="type" value="MoneyBack" /> Money Back
               </span>
+
+              <span id="term">
+                <input type="radio" name="term" value="Monthly" /> Monthly
+                <input type="radio" name="term" value="Quarterly" /> Quarterly
+                <input type="radio" name="term" value="Half-Yearly" /> Half-Yearly
+                <input id="preselect" type="radio" name="term" value="Yearly" aria-checked="true"/> Yearly
+              </span>
+              <input type="text" placeholder="Date Of Birth  (B.S.)" id="dobField" />
               <input
                 type="text"
-                placeholder="Insured Term"
-                id="insuredTermField"
-              />
-              <input
-                type="text"
-                placeholder="Occupation"
+                placeholder="Occupation(optional)"
                 id="occupationField"
                 className="optional"
               />
-              <button className="mainButton" onClick={convertToCSV}>
+              <button className="mainButton" onClick={convertToCSV} type="button">
                 Compare
               </button>
             </div>
@@ -144,8 +225,6 @@ export default function Compare() {
         </div>
 
         <div id="chooseBreak"></div>
-
-        <h1>{formData.dob}</h1>
       </div>
     </>
   );

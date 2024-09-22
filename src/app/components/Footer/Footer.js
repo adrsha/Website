@@ -9,9 +9,10 @@ export default function Footer(){
         'Articles',
         'List of all life policies',
         'List of all companies']
-    const resListArr= resList.map(listText =>{
+    
+    const resListArr= resList.map((listText, index) =>{
     return (
-    <li className="resText">{listText}</li>
+    <li className="resText" key={index}>{listText}</li>
     )
     })
     const otherList=[
@@ -19,9 +20,9 @@ export default function Footer(){
         'Privacy policy',
         'Terms and conditions',
         'Site map']
-    const otherListArr= otherList.map(listText =>{
+    const otherListArr= otherList.map((listText, index) =>{
     return (
-    <li className="resText">{listText}</li>
+    <li className="resText" key={index}>{listText}</li>
     )
     })
 
@@ -30,9 +31,9 @@ export default function Footer(){
         '+977-982137877123124124',
         'Click to Email Us',
         'Sun-Fri 9:00AM - 06:00PM']
-    const contactInfoArr= contactInfo.map(listText =>{
+    const contactInfoArr= contactInfo.map((listText, index) =>{
     return (
-    <li className="conText">{listText}</li>
+    <li className="conText" key={index}>{listText}</li>
     )
     })
 
@@ -40,9 +41,9 @@ export default function Footer(){
         "/icons8-facebook-24.png" ,
         "/icons8-instagram-24.png" ,
         "/icons8-linkedin-24.png" ]
-    const followListArr= followList.map(listIcon =>{
+    const followListArr= followList.map((listIcon, index) =>{
         return (
-            <img src={listIcon} style={{filter:'invert()'}}/>
+            <img src={listIcon} key={index} style={{filter:'invert()'}}/>
         )
         })
 

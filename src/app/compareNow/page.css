@@ -77,7 +77,8 @@
 }
 
 span#type,
-span#gender {
+span#gender,
+span#term {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -91,13 +92,17 @@ span#gender {
 span#gender::before {
   content: "Gender";
 }
+span#term::before {
+  content: "Term";
+}
 
 span#type::before {
-  content: "Type";
+  content: "Type(optional)";
 }
 
 span#gender::before,
-span#type::before {
+span#type::before,
+span#term::before {
   position: absolute;
   font-weight: bold;
   font-size: 1.5rem;
