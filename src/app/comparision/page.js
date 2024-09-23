@@ -2,10 +2,13 @@
 import "./page.css";
 import { Children } from "react";
 import { useEffect, useState } from "react";
-import filter from "./comparision/filter.js"
 import papa from "papaparse"
 import { row } from "mathjs";
+import DisplayData from "./DisplayData";
 export default function Compare() {
+
+  const [showThisPage, setShowThisPage]=useState(true)
+
   const [formData, setFormData] = useState({
     name: "",
     dob: "",
@@ -21,8 +24,10 @@ export default function Compare() {
 
   // runs at start; used to fetch and parse csv file
   useEffect(() => {
-    let term=document.getElementById("preselect")
+    let term=document.getElementById("preselect")//for default checkbox
     term.click()
+
+
     fetch('/lic/Endowment/parameters.csv')
       .then(response => response.text())
       .then(csvText => {
@@ -32,17 +37,22 @@ export default function Compare() {
       .catch(error => console.error('Error fetching CSV:', error));
   }, []);
 
+  useEffect(()=>{
+    let container=document.getElementById("compareContainer");
+    if(showThisPage==false){
+      container.style.display="None";
+    }
+  },[showThisPage]);
+
   //activates each time csvData fetch from file and formData from user changes
     useEffect(() => {
     //console.log("hello");
      //console.log(formData);
-     filter(formData)
     // console.log(csvData, "csv data")
 
     if (csvData.length > 0) {
       compareFormWithCSV();
     }
-
   }, [formData, csvData]);
 
   //just simple fxn to calculate age from date
@@ -83,6 +93,13 @@ export default function Compare() {
       setComparisonResult("No match found in CSV.");
     }
   };
+
+  function handleButtonClick(){
+    setShowThisPage(!showThisPage);
+    convertToCSV(data);
+  }
+
+  //this Fxn works....better leave it that way
   function convertToCSV(data) {
     const nameElement = document.getElementById("nameField");
     const dob = nameElement.parentElement.children[1].value;
@@ -112,31 +129,10 @@ export default function Compare() {
         insuredTerm,
         occupation,
       });
-      saveUserData(formData);
+      setShowThisPage(false);
     }
   }
 
-
-  async function saveUserData(data) {
-    try {
-      const response = await fetch('/api/saveUserData', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      
-      if (response.ok) {
-        const result = await response.json();
-        console.log(response.json())
-      } else {
-        const errorText = await response.text();
-      }
-    } catch (error) {
-      console.error('Error saving data:', error);
-    }
-  }
   return (
     <>
       <div id="compareContainer">
