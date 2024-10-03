@@ -84,7 +84,7 @@ span#term {
   justify-content: space-between;
   align-items: flex-start;
   position: relative;
-  margin-bottom: 1vw;
+  margin-bottom: 2vw;
   color: var(--secondaryA);
   font-weight: bold;
 }

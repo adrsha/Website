@@ -31,9 +31,9 @@ import { e } from "mathjs";
 import papa from "papaparse";
 
 export const CalculatePremiumLic = async (userData) => {
-  const { SA, Term, Age, Mode = "all", DAB = 0, TR = 0, YLY=1, tabrate=2} = userData;
+  const { SA, Term, Age, Mode = "all", DAB = 0, TR = 0, YLY = 1, tabrate = 2 } = userData;
   let rebate = 0;
-  let loadingCharge=0;
+  let loadingCharge = 0;
 
   try {
     // // Fetch multiple CSV files for different parameters
@@ -43,13 +43,15 @@ export const CalculatePremiumLic = async (userData) => {
     //   fetch('/lic/tabrate.csv').then(response => response.text())
     // ]);
 
-    // // Process rebate data
-    // const rebateData = papa.parse(rebateCsv, { header: false });
-    // const rebatedata = rebateData.data.find((row) => {
-    //   if (row[1] <= SA && SA <= row[2]){
-    //     rebate = row[0]
-    //   }
-    // });
+    // Process rebate data
+    const rebateData = papa.parse(rebateCsv, { header: false });
+    const rebatedata = rebateData.data.find((row) => {
+      return (row[1] <= SA && SA <= row[2]);
+    });
+
+    if (rebatedata) {
+      rebate = 5; // Example rebate value
+    }
 
 
     // // Process loading charge data

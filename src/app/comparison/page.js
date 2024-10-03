@@ -6,9 +6,72 @@ import papa from "papaparse"
 import { row } from "mathjs";
 import DisplayData from "./DataFilter";
 import DataFilter from "./DataFilter";
+
+//just simple fxn to calculate age from date
+function calculateAge(dob) {
+  const birthDate = new Date(dob);
+  const today = new Date();
+
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDifference = today.getMonth() - birthDate.getMonth();
+
+  // Adjust age if the birthday hasn't occurred yet this year
+  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age;
+}
+
+function handleButtonClick(data) {
+  setShowThisPage(!showThisPage);
+  getData(data);
+}
+
+//this Fxn works....better leave it that way
+function getData(data) {
+  const nameElement = document.getElementById("nameField");
+  const insuredTerm = nameElement.parentElement.children[1].value;
+  const insuredAmount = nameElement.parentElement.children[2].value;
+  const income = nameElement.parentElement.children[3].value;
+  const term = document.querySelector(
+    'input[name="term"]:checked',
+  )?.value;
+  const gender = document.querySelector(
+    'input[name="gender"]:checked',
+  )?.value;
+  const type = document.querySelector(
+    'input[name="type"]:checked',
+  )?.value;
+  const dob =
+    nameElement.parentElement.parentElement.children[1].children[3].value;
+  if (nameElement.value != "" && dob != "" && insuredAmount != "" && income != "" && insuredAmount != "" && gender != "") {
+    // Retrieve the parent elements and their children correctly
+    const phoneNumber = nameElement.parentElement.children[4].value;
+
+    const occupation =
+      nameElement.parentElement.parentElement.children[1].children[4].value;
+
+    // Update the state with form data
+    setFormData({
+      name: nameElement.value, // Correctly get the value
+      insuredTerm,//10, 15...
+      insuredAmount,
+      income,
+      type,// endowment/ termlife/ ...
+      gender,
+      phoneNumber,
+      dob,
+      term, //yly, hly, mly,...
+      occupation,
+    });
+  }
+}
+
+
 export default function Compare() {
 
-  const [showThisPage, setShowThisPage]=useState(true)
+  const [showThisPage, setShowThisPage] = useState(true)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -23,72 +86,51 @@ export default function Compare() {
     occupation: "",
   });
   const [csvData, setCsvData] = useState([]);
-  //just simple fxn to calculate age from date
-  function calculateAge(dob) {
-    const birthDate = new Date(dob);
-    const today = new Date();
-    
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDifference = today.getMonth() - birthDate.getMonth();
-  
-    // Adjust age if the birthday hasn't occurred yet this year
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
+  const [comparisonResult, setComparisonResult] = useState("");
+
+  // runs at start; used to fetch and parse csv file
+  useEffect(() => {
+    let term = document.getElementById("preselect")//for default checkbox
+    term.click()
+
+
+    fetch('/lic/Endowment/parameters.csv')
+      .then(response => response.text())
+      .then(csvText => {
+        const result = papa.parse(csvText, { header: false });
+        setCsvData(result.data);
+      })
+      .catch(error => console.error('Error fetching CSV:', error));
+  }, []);
+
+
+  //activates each time csvData fetch from file and formData from user changes
+  useEffect(() => {
+
+    if (csvData.length > 0) {
+      compareFormWithCSV();
     }
-  
-    return age;
-  }
+  }, [formData, csvData]);
 
-  function handleButtonClick(data){
-    setShowThisPage(!showThisPage);
-    getData(data);
-  }
 
-  //this Fxn works....better leave it that way
-  function getData(data) {
-    const nameElement = document.getElementById("nameField");
-    const insuredTerm = nameElement.parentElement.children[1].value;
-    const insuredAmount = nameElement.parentElement.children[2].value;
-    const income = nameElement.parentElement.children[3].value;
-    const term = document.querySelector(
-      'input[name="term"]:checked',
-    )?.value;
-    const gender = document.querySelector(
-      'input[name="gender"]:checked',
-    )?.value;
-    const type = document.querySelector(
-      'input[name="type"]:checked',
-    )?.value;
-    const dob =
-    nameElement.parentElement.parentElement.children[1].children[3].value;
-    if (nameElement.value!="" && dob!="" && insuredAmount!="" && income!="" && insuredAmount!="" && gender!="") {
-      // Retrieve the parent elements and their children correctly
-      const phoneNumber = nameElement.parentElement.children[4].value;
+  //compares the formData with csvData
+  const compareFormWithCSV = () => {
+    //console.log(csvData)
+    const match = csvData.find(row =>
+      console.log(formData.name)
+    );
 
-      const occupation =
-        nameElement.parentElement.parentElement.children[1].children[4].value;
-
-      // Update the state with form data
-      setFormData({
-        name: nameElement.value, // Correctly get the value
-        insuredTerm,//10, 15...
-        insuredAmount,
-        income,
-        type,// endowment/ termlife/ ...
-        gender,
-        phoneNumber,
-        dob,
-        term, //yly, hly, mly,...
-        occupation,
-      });
+    if (match) {
+      setComparisonResult("Match found in CSV!");
+    } else {
+      setComparisonResult("No match found in CSV.");
     }
-  }
+  };
 
   return (
-    
     <>
-    {showThisPage ? (
-          <div id="compareContainer">
+      {showThisPage ? (
+        <div id="compareContainer">
           <div className="compareContents" id="searchPlans">
             <h1>
               <span id="searchSpan">Search</span>
@@ -102,7 +144,7 @@ export default function Compare() {
               the plan that suits you best.
             </p>
           </div>
-  
+
           <div className="surrounddatafields">
             <form className="compareContents" id="endowmentdatafields">
               <div id="datafieldLeft">
@@ -152,12 +194,12 @@ export default function Compare() {
                   <input type="radio" name="type" value="TermLife" /> Term Life
                   <input type="radio" name="type" value="MoneyBack" /> Money Back
                 </span>
-  
+
                 <span id="term">
                   <input type="radio" name="term" value="Monthly" /> Monthly
                   <input type="radio" name="term" value="Quarterly" /> Quarterly
                   <input type="radio" name="term" value="Half-Yearly" /> Half-Yearly
-                  <input id="preselect" type="radio" name="term" value="Yearly" aria-checked="true"/> Yearly
+                  <input id="preselect" type="radio" name="term" value="Yearly" aria-checked="true" /> Yearly
                 </span>
                 <input type="text" placeholder="Date Of Birth  (B.S.)" id="dobField" />
                 <input
@@ -172,13 +214,12 @@ export default function Compare() {
               </div>
             </form>
           </div>
-  
+
           <div id="chooseBreak"></div>
         </div>
-        ) : (
-          <DataFilter data={formData} /> // Render the DisplayData component
-        )}
-      
+      ) : (
+        <DataFilter data={formData} /> // Render the DisplayData component
+      )}
     </>
   );
 }
