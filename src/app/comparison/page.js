@@ -86,32 +86,13 @@ export default function Compare() {
     occupation: "",
   });
   const [csvData, setCsvData] = useState([]);
-  const [comparisonResult, setComparisonResult] = useState("");
-
-  // runs at start; used to fetch and parse csv file
-  useEffect(() => {
-    let term = document.getElementById("preselect")//for default checkbox
-    term.click()
 
 
-    fetch('/lic/Endowment/parameters.csv')
-      .then(response => response.text())
-      .then(csvText => {
-        const result = papa.parse(csvText, { header: false });
-        setCsvData(result.data);
-      })
-      .catch(error => console.error('Error fetching CSV:', error));
-  }, []);
-
-
-  //activates each time csvData fetch from file and formData from user changes
-  useEffect(() => {
-
-    if (csvData.length > 0) {
-      compareFormWithCSV();
-    }
-  }, [formData, csvData]);
-
+  
+  function handleButtonClick(data){
+    setShowThisPage(!showThisPage);
+    getData(data);
+  }
 
   //compares the formData with csvData
   const compareFormWithCSV = () => {

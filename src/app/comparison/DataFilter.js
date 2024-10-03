@@ -1,3 +1,6 @@
+//core backend.....contains interface to userData, filter through multiple policies, contains multiple premium results to be passed to display page
+
+
 'use client';
 import { CalculatePremiumLic } from "./premiumCalculation";
 import { useEffect, useState } from "react";
@@ -11,6 +14,23 @@ export default function DataFilter({data}){
         let mode = data.type
         let ylyStr=data.term
         let yly
+
+          //just simple fxn to calculate age from date
+        function calculateAge(dob) {
+            const birthDate = new Date(dob);
+            const today = new Date();
+
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDifference = today.getMonth() - birthDate.getMonth();
+
+            // Adjust age if the birthday hasn't occurred yet this year
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            return age;
+        }
+
         switch(ylyStr){
             case "Yearly":
                 yly=1
