@@ -45,12 +45,11 @@ export const CalculatePremiumLic = async (userData) => {
     // Process rebate data
     const rebateData = papa.parse(rebateCsv, { header: false });
     const rebatedata = rebateData.data.find((row) => {
-      return (row[1] <= SA && SA <= row[2]);
+      if (row[1] <= SA && SA <= row[2]){
+        rebate = row[0]
+      }
     });
-    
-    if (rebatedata) {
-      rebate = 5; // Example rebate value
-    }
+
 
     // Process loading charge data
     const loadingChargeData = papa.parse(loadingChargeCsv, { header: true });

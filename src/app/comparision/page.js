@@ -14,6 +14,7 @@ export default function Compare() {
     dob: "",
     insuredAmount: "",
     income: "",
+    type: "",
     phoneNumber: "",
     age: "",
     insuredTerm: "",
