@@ -37,12 +37,12 @@ export default function Compare() {
       .catch(error => console.error('Error fetching CSV:', error));
   }, []);
 
-  useEffect(()=>{
-    let container=document.getElementById("compareContainer");
-    if(showThisPage==false){
-      container.style.display="None";
-    }
-  },[showThisPage]);
+  // useEffect(()=>{
+  //   let container=document.getElementById("compareContainer");
+  //   if(showThisPage==false){
+  //     container.style.display="None";
+  //   }
+  // },[showThisPage]);
 
   //activates each time csvData fetch from file and formData from user changes
     useEffect(() => {
@@ -75,7 +75,7 @@ export default function Compare() {
   const compareFormWithCSV = () => {
     //console.log(csvData)
     const match = csvData.find(row => 
-      console.log(row)
+      console.log(formData.name)
       //row[1]<formData.age
       // row.dob === formData.dob &&
       // row.insuredAmount === formData.insuredAmount &&
@@ -94,13 +94,13 @@ export default function Compare() {
     }
   };
 
-  function handleButtonClick(){
+  function handleButtonClick(data){
     setShowThisPage(!showThisPage);
-    convertToCSV(data);
+    getData(data);
   }
 
   //this Fxn works....better leave it that way
-  function convertToCSV(data) {
+  function getData(data) {
     const nameElement = document.getElementById("nameField");
     const dob = nameElement.parentElement.children[1].value;
     const insuredAmount = nameElement.parentElement.children[2].value;
@@ -129,99 +129,104 @@ export default function Compare() {
         insuredTerm,
         occupation,
       });
-      setShowThisPage(false);
     }
   }
 
   return (
+    
     <>
-      <div id="compareContainer">
-        <div className="compareContents" id="searchPlans">
-          <h1>
-            <span id="searchSpan">Search</span>
-            <span id="planSpan">Plans</span>
-          </h1>
-          <p className="fattext">
-            Choosing the right plan can be a crucial decision for your needs,
-            whether you’re an individual, a small business, or a large
-            enterprise. To help you make the best choice, we’ve outlined the key
-            features and benefits of each of our plans below. Compare and select
-            the plan that suits you best.
-          </p>
-        </div>
-
-        <div className="surrounddatafields">
-          <form className="compareContents" id="endowmentdatafields">
-            <div id="datafieldLeft">
-              <input
-                type="text"
-                placeholder="Name"
-                id="nameField"
-                className="optional"
-              />
-              <input
-                type="text"
-                placeholder="Insured Term"
-                id="insuredTermField"
-              />
-              <input
-                type="text"
-                placeholder="Insured Amount"
-                id="insuredAmmountField"
-              />
-              <input type="text" placeholder="Income" id="incomeField" />
-              <input
-                type="text"
-                placeholder="Phone Number(optional)"
-                id="phoneField"
-                className="optional"
-              />
-            </div>
-            <div id="datafieldRight">
-              <span id="gender">
+    {showThisPage ? (
+          <div id="compareContainer">
+          <div className="compareContents" id="searchPlans">
+            <h1>
+              <span id="searchSpan">Search</span>
+              <span id="planSpan">Plans</span>
+            </h1>
+            <p className="fattext">
+              Choosing the right plan can be a crucial decision for your needs,
+              whether you’re an individual, a small business, or a large
+              enterprise. To help you make the best choice, we’ve outlined the key
+              features and benefits of each of our plans below. Compare and select
+              the plan that suits you best.
+            </p>
+          </div>
+  
+          <div className="surrounddatafields">
+            <form className="compareContents" id="endowmentdatafields">
+              <div id="datafieldLeft">
                 <input
-                  type="radio"
-                  name="gender"
-                  value="Male"
+                  type="text"
+                  placeholder="Name"
+                  id="nameField"
                   className="optional"
-                />{" "}
-                Male
+                />
                 <input
-                  type="radio"
-                  name="gender"
-                  value="Female"
+                  type="text"
+                  placeholder="Insured Term"
+                  id="insuredTermField"
+                />
+                <input
+                  type="text"
+                  placeholder="Insured Amount"
+                  id="insuredAmmountField"
+                />
+                <input type="text" placeholder="Income" id="incomeField" />
+                <input
+                  type="text"
+                  placeholder="Phone Number(optional)"
+                  id="phoneField"
                   className="optional"
-                />{" "}
-                Female
-              </span>
-              <span id="type">
-                <input type="radio" name="type" value="Endowment" /> Endowment
-                <input type="radio" name="type" value="TermLife" /> Term Life
-                <input type="radio" name="type" value="MoneyBack" /> Money Back
-              </span>
-
-              <span id="term">
-                <input type="radio" name="term" value="Monthly" /> Monthly
-                <input type="radio" name="term" value="Quarterly" /> Quarterly
-                <input type="radio" name="term" value="Half-Yearly" /> Half-Yearly
-                <input id="preselect" type="radio" name="term" value="Yearly" aria-checked="true"/> Yearly
-              </span>
-              <input type="text" placeholder="Date Of Birth  (B.S.)" id="dobField" />
-              <input
-                type="text"
-                placeholder="Occupation(optional)"
-                id="occupationField"
-                className="optional"
-              />
-              <button className="mainButton" onClick={convertToCSV} type="button">
-                Compare
-              </button>
-            </div>
-          </form>
+                />
+              </div>
+              <div id="datafieldRight">
+                <span id="gender">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="Male"
+                    className="optional"
+                  />{" "}
+                  Male
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="Female"
+                    className="optional"
+                  />{" "}
+                  Female
+                </span>
+                <span id="type">
+                  <input type="radio" name="type" value="Endowment" /> Endowment
+                  <input type="radio" name="type" value="TermLife" /> Term Life
+                  <input type="radio" name="type" value="MoneyBack" /> Money Back
+                </span>
+  
+                <span id="term">
+                  <input type="radio" name="term" value="Monthly" /> Monthly
+                  <input type="radio" name="term" value="Quarterly" /> Quarterly
+                  <input type="radio" name="term" value="Half-Yearly" /> Half-Yearly
+                  <input id="preselect" type="radio" name="term" value="Yearly" aria-checked="true"/> Yearly
+                </span>
+                <input type="text" placeholder="Date Of Birth  (B.S.)" id="dobField" />
+                <input
+                  type="text"
+                  placeholder="Occupation(optional)"
+                  id="occupationField"
+                  className="optional"
+                />
+                <button className="mainButton" onClick={handleButtonClick} type="button">
+                  Compare
+                </button>
+              </div>
+            </form>
+          </div>
+  
+          <div id="chooseBreak"></div>
         </div>
-
-        <div id="chooseBreak"></div>
-      </div>
+        ) : (
+          <DisplayData data={formData} /> // Render the DisplayData component
+        )}
+      
     </>
   );
 }
