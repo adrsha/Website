@@ -9,7 +9,7 @@
 }
 #navBar{
     width: 100%;
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
     height: 100%;
     display: flex;
     align-items: center;
@@ -175,10 +175,10 @@
     aspect-ratio: 1;
     height: 3vh;
     display: flex;
+    max-width: 10%;
     opacity: 0.8;
     flex: 1;
 }
-
 
 .spandiv{
     flex: 8;

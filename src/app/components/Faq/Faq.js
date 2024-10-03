@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Faq.css";
 
-const faqData = [
+const faqData1 = [
   {
     question: "Is Insurance Sathi an insurance provider?",
     answer: "Insurance Sathi is not an insurance provider. We are a comparison platform that helps you compare different life insurance plans available in Nepal."
@@ -15,6 +15,9 @@ const faqData = [
     question: "How does Insurance Sathi make money?",
     answer: "Insurance Sathi earns money from the Adverts displayed on the website currently."
   },
+];
+
+const faqData2 = [
   {
     question: "Is my personal information safe on Insurance Sathi?",
     answer: "Yes, we take your privacy seriously. Your personal information is encrypted and securely stored. We only use it to provide you with accurate insurance comparisons and do not sell your data to third parties."
@@ -34,35 +37,62 @@ export default function Faq() {
   };
 
   return (
-    <div className="faq">
+    <>
       <div className="heading">
         Frequently Asked Questions
       </div>
-      <div className="faqContainer">
-        {faqData.map((item, index) => (
-          <div key={index} className="faqItem" onClick={() => toggleExpand(index)}>
-            <div className="faqHeader">
-              <div className="faqQuestion">
-                {item.question}
+      <div className="faq">
+        <div className="faqContainer">
+          {faqData1.map((item, index) => (
+            <div key={index} className="faqItem" onClick={() => toggleExpand(index)}>
+              <div className="faqHeader">
+                <div className="faqQuestion">
+                  {item.question}
+                </div>
+                <div className={`arrow ${expandedIndex === index ? 'expanded' : ''}`}>
+                  ꜜ
+                </div>
               </div>
-              <div className={`arrow ${expandedIndex === index ? 'expanded' : ''}`}>
-                ˅
+              <div
+                ref={(el) => (refs.current[index] = el)}
+                className="faqAnswer"
+                style={{
+                  height: expandedIndex === index ? `${refs.current[index]?.scrollHeight}px` : "0",
+                  overflow: "hidden",
+                  transition: "height 0.5s ease-in-out"
+                }}
+              >
+                {item.answer}
               </div>
             </div>
-            <div
-              ref={(el) => (refs.current[index] = el)}
-              className="faqAnswer"
-              style={{
-                height: expandedIndex === index ? `${refs.current[index]?.scrollHeight}px` : "0",
-                overflow: "hidden",
-                transition: "height 0.5s ease-in-out"
-              }}
-            >
-              {item.answer}
+          ))}
+        </div>
+        <div className="faqContainer">
+          {faqData2.map((item, index) => (
+            <div key={index + faqData1.length} className="faqItem" onClick={() => toggleExpand(index + faqData1.length)}>
+              <div className="faqHeader">
+                <div className="faqQuestion">
+                  {item.question}
+                </div>
+                <div className={`arrow ${expandedIndex === index + faqData1.length ? 'expanded' : ''}`}>
+                  ꜜ
+                </div>
+              </div>
+              <div
+                ref={(el) => (refs.current[index + faqData1.length] = el)}
+                className="faqAnswer"
+                style={{
+                  height: expandedIndex === index + faqData1.length ? `${refs.current[index + faqData1.length]?.scrollHeight}px` : "0",
+                  overflow: "hidden",
+                  transition: "height 0.5s ease-in-out"
+                }}
+              >
+                {item.answer}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
