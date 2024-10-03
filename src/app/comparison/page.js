@@ -4,7 +4,8 @@ import { Children } from "react";
 import { useEffect, useState } from "react";
 import papa from "papaparse"
 import { row } from "mathjs";
-import DisplayData from "./DisplayData";
+import DisplayData from "./DataFilter";
+import DataFilter from "./DataFilter";
 export default function Compare() {
 
   const [showThisPage, setShowThisPage]=useState(true)
@@ -15,47 +16,13 @@ export default function Compare() {
     insuredAmount: "",
     income: "",
     type: "",
+    gender: "",
     phoneNumber: "",
-    age: "",
+    dob: "",
     insuredTerm: "",
     occupation: "",
   });
   const [csvData, setCsvData] = useState([]);
-  const [comparisonResult, setComparisonResult] = useState("");
-
-  // runs at start; used to fetch and parse csv file
-  useEffect(() => {
-    let term=document.getElementById("preselect")//for default checkbox
-    term.click()
-
-
-    fetch('/lic/Endowment/parameters.csv')
-      .then(response => response.text())
-      .then(csvText => {
-        const result = papa.parse(csvText, { header: false });
-        setCsvData(result.data);
-      })
-      .catch(error => console.error('Error fetching CSV:', error));
-  }, []);
-
-  // useEffect(()=>{
-  //   let container=document.getElementById("compareContainer");
-  //   if(showThisPage==false){
-  //     container.style.display="None";
-  //   }
-  // },[showThisPage]);
-
-  //activates each time csvData fetch from file and formData from user changes
-    useEffect(() => {
-    //console.log("hello");
-     //console.log(formData);
-    // console.log(csvData, "csv data")
-
-    if (csvData.length > 0) {
-      compareFormWithCSV();
-    }
-  }, [formData, csvData]);
-
   //just simple fxn to calculate age from date
   function calculateAge(dob) {
     const birthDate = new Date(dob);
@@ -72,29 +39,6 @@ export default function Compare() {
     return age;
   }
 
-  //compares the formData with csvData
-  const compareFormWithCSV = () => {
-    //console.log(csvData)
-    const match = csvData.find(row => 
-      console.log(formData.name)
-      //row[1]<formData.age
-      // row.dob === formData.dob &&
-      // row.insuredAmount === formData.insuredAmount &&
-      // row.income === formData.income &&
-      // row.phoneNumber === formData.phoneNumber &&
-      // row.age === formData.age &&
-      // row.insuredTerm === formData.insuredTerm &&
-      // row.occupation === formData.occupation &&
-      // row.gender === formData.gender
-    );
-
-    if (match) {
-      setComparisonResult("Match found in CSV!");
-    } else {
-      setComparisonResult("No match found in CSV.");
-    }
-  };
-
   function handleButtonClick(data){
     setShowThisPage(!showThisPage);
     getData(data);
@@ -103,31 +47,38 @@ export default function Compare() {
   //this Fxn works....better leave it that way
   function getData(data) {
     const nameElement = document.getElementById("nameField");
-    const dob = nameElement.parentElement.children[1].value;
+    const insuredTerm = nameElement.parentElement.children[1].value;
     const insuredAmount = nameElement.parentElement.children[2].value;
     const income = nameElement.parentElement.children[3].value;
-    const insuredTerm = nameElement.parentElement.parentElement.children[1].children[2].value;
+    const term = document.querySelector(
+      'input[name="term"]:checked',
+    )?.value;
     const gender = document.querySelector(
       'input[name="gender"]:checked',
     )?.value;
+    const type = document.querySelector(
+      'input[name="type"]:checked',
+    )?.value;
+    const dob =
+    nameElement.parentElement.parentElement.children[1].children[3].value;
     if (nameElement.value!="" && dob!="" && insuredAmount!="" && income!="" && insuredAmount!="" && gender!="") {
       // Retrieve the parent elements and their children correctly
       const phoneNumber = nameElement.parentElement.children[4].value;
-      const age =
-        nameElement.parentElement.parentElement.children[1].children[1].value;
+
       const occupation =
-        nameElement.parentElement.parentElement.children[1].children[3].value;
+        nameElement.parentElement.parentElement.children[1].children[4].value;
 
       // Update the state with form data
       setFormData({
         name: nameElement.value, // Correctly get the value
-        dob,
+        insuredTerm,//10, 15...
         insuredAmount,
         income,
-        phoneNumber,
+        type,// endowment/ termlife/ ...
         gender,
-        age,
-        insuredTerm,
+        phoneNumber,
+        dob,
+        term, //yly, hly, mly,...
         occupation,
       });
     }
@@ -225,7 +176,7 @@ export default function Compare() {
           <div id="chooseBreak"></div>
         </div>
         ) : (
-          <DisplayData data={formData} /> // Render the DisplayData component
+          <DataFilter data={formData} /> // Render the DisplayData component
         )}
       
     </>
