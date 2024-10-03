@@ -2,7 +2,7 @@
 import "./page.css";
 import { Children } from "react";
 import { useEffect, useState } from "react";
-import papa from "papaparse"
+import papa from "papaparse";
 import { row } from "mathjs";
 import DisplayData from "./DataFilter";
 import DataFilter from "./DataFilter";
@@ -16,62 +16,28 @@ function calculateAge(dob) {
   const monthDifference = today.getMonth() - birthDate.getMonth();
 
   // Adjust age if the birthday hasn't occurred yet this year
-  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+  if (
+    monthDifference < 0 ||
+    (monthDifference === 0 && today.getDate() < birthDate.getDate())
+  ) {
     age--;
   }
 
   return age;
 }
 
-function handleButtonClick(data) {
-  setShowThisPage(!showThisPage);
-  getData(data);
-}
-
 //this Fxn works....better leave it that way
-function getData(data) {
-  const nameElement = document.getElementById("nameField");
-  const insuredTerm = nameElement.parentElement.children[1].value;
-  const insuredAmount = nameElement.parentElement.children[2].value;
-  const income = nameElement.parentElement.children[3].value;
-  const term = document.querySelector(
-    'input[name="term"]:checked',
-  )?.value;
-  const gender = document.querySelector(
-    'input[name="gender"]:checked',
-  )?.value;
-  const type = document.querySelector(
-    'input[name="type"]:checked',
-  )?.value;
-  const dob =
-    nameElement.parentElement.parentElement.children[1].children[3].value;
-  if (nameElement.value != "" && dob != "" && insuredAmount != "" && income != "" && insuredAmount != "" && gender != "") {
-    // Retrieve the parent elements and their children correctly
-    const phoneNumber = nameElement.parentElement.children[4].value;
-
-    const occupation =
-      nameElement.parentElement.parentElement.children[1].children[4].value;
-
-    // Update the state with form data
-    setFormData({
-      name: nameElement.value, // Correctly get the value
-      insuredTerm,//10, 15...
-      insuredAmount,
-      income,
-      type,// endowment/ termlife/ ...
-      gender,
-      phoneNumber,
-      dob,
-      term, //yly, hly, mly,...
-      occupation,
-    });
-  }
-}
-
 
 export default function Compare() {
+  const [showThisPage, setShowThisPage] = useState(true);
 
-  const [showThisPage, setShowThisPage] = useState(true)
+  const [csvData, setCsvData] = useState([]);
+  const [comparisonResult, setComparisonResult] = useState("");
+
+  function handleButtonClick(data) {
+    setShowThisPage(!showThisPage);
+    getData(data);
+  }
 
   const [formData, setFormData] = useState({
     name: "",
@@ -85,21 +51,74 @@ export default function Compare() {
     insuredTerm: "",
     occupation: "",
   });
-  const [csvData, setCsvData] = useState([]);
 
+  function getData(data) {
+    const nameElement = document.getElementById("nameField");
+    const insuredTerm = nameElement.parentElement.children[1].value;
+    const insuredAmount = nameElement.parentElement.children[2].value;
+    const income = nameElement.parentElement.children[3].value;
+    const term = document.querySelector('input[name="term"]:checked')?.value;
+    const gender = document.querySelector(
+      'input[name="gender"]:checked',
+    )?.value;
+    const type = document.querySelector('input[name="type"]:checked')?.value;
+    const dob =
+      nameElement.parentElement.parentElement.children[1].children[3].value;
+    if (
+      nameElement.value != "" &&
+      dob != "" &&
+      insuredAmount != "" &&
+      income != "" &&
+      insuredAmount != "" &&
+      gender != ""
+    ) {
+      // Retrieve the parent elements and their children correctly
+      const phoneNumber = nameElement.parentElement.children[4].value;
 
-  
-  function handleButtonClick(data){
-    setShowThisPage(!showThisPage);
-    getData(data);
+      const occupation =
+        nameElement.parentElement.parentElement.children[1].children[4].value;
+
+      // Update the state with form data
+      setFormData({
+        name: nameElement.value, // Correctly get the value
+        insuredTerm, //10, 15...
+        insuredAmount,
+        income,
+        type, // endowment/ termlife/ ...
+        gender,
+        phoneNumber,
+        dob,
+        term, //yly, hly, mly,...
+        occupation,
+      });
+    }
   }
+
+  // runs at start; used to fetch and parse csv file
+  useEffect(() => {
+    let term = document.getElementById("preselect"); //for default checkbox
+    term.click();
+
+    fetch("/lic/Endowment/parameters.csv")
+      .then((response) => response.text())
+      .then((csvText) => {
+        const result = papa.parse(csvText, { header: false });
+        setCsvData(result.data);
+      })
+      .catch((error) => console.error("Error fetching CSV:", error));
+  }, []);
+
+  //activates each time csvData fetch from file and formData from user changes
+  useEffect(() => {
+    if (csvData.length > 0) {
+      compareFormWithCSV();
+    }
+  }, [formData, csvData]);
 
   //compares the formData with csvData
   const compareFormWithCSV = () => {
     //console.log(csvData)
-    const match = csvData.find(row =>
-      console.log(formData.name)
-    );
+    const match = csvData.find((row) => console.log(formData));
 
     if (match) {
       setComparisonResult("Match found in CSV!");
@@ -120,9 +139,9 @@ export default function Compare() {
             <p className="fattext">
               Choosing the right plan can be a crucial decision for your needs,
               whether you’re an individual, a small business, or a large
-              enterprise. To help you make the best choice, we’ve outlined the key
-              features and benefits of each of our plans below. Compare and select
-              the plan that suits you best.
+              enterprise. To help you make the best choice, we’ve outlined the
+              key features and benefits of each of our plans below. Compare and
+              select the plan that suits you best.
             </p>
           </div>
 
@@ -173,23 +192,40 @@ export default function Compare() {
                 <span id="type">
                   <input type="radio" name="type" value="Endowment" /> Endowment
                   <input type="radio" name="type" value="TermLife" /> Term Life
-                  <input type="radio" name="type" value="MoneyBack" /> Money Back
+                  <input type="radio" name="type" value="MoneyBack" /> Money
+                  Back
                 </span>
 
                 <span id="term">
                   <input type="radio" name="term" value="Monthly" /> Monthly
                   <input type="radio" name="term" value="Quarterly" /> Quarterly
-                  <input type="radio" name="term" value="Half-Yearly" /> Half-Yearly
-                  <input id="preselect" type="radio" name="term" value="Yearly" aria-checked="true" /> Yearly
+                  <input type="radio" name="term" value="Half-Yearly" />{" "}
+                  Half-Yearly
+                  <input
+                    id="preselect"
+                    type="radio"
+                    name="term"
+                    value="Yearly"
+                    aria-checked="true"
+                  />{" "}
+                  Yearly
                 </span>
-                <input type="text" placeholder="Date Of Birth  (B.S.)" id="dobField" />
+                <input
+                  type="text"
+                  placeholder="Date Of Birth  (B.S.)"
+                  id="dobField"
+                />
                 <input
                   type="text"
                   placeholder="Occupation(optional)"
                   id="occupationField"
                   className="optional"
                 />
-                <button className="mainButton" onClick={handleButtonClick} type="button">
+                <button
+                  className="mainButton"
+                  onClick={handleButtonClick}
+                  type="button"
+                >
                   Compare
                 </button>
               </div>

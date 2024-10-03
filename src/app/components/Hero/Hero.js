@@ -36,7 +36,7 @@ export default function Hero() {
         <h1>
           तपाईँको आवश्यकता अनुसार <i>उचित बीमा योजना</i> खोज्नुहोस्।
         </h1>
-        <a href="/comparision"><button className="mainButton" >Compare Now</button></a>
+        <a href="/comparison"><button className="mainButton" >Compare Now</button></a>
       </div>
       <div className="heroAdvert">
         <div className="heroCarousel">
