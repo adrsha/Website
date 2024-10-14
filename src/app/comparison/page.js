@@ -69,7 +69,7 @@ export default function Compare() {
       dob != "" &&
       insuredAmount != "" &&
       income != "" &&
-      insuredAmount != "" &&
+      insuredTerm != "" &&
       gender != ""
     ) {
       // Retrieve the parent elements and their children correctly
