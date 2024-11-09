@@ -87,7 +87,7 @@ export default function Compare() {
         insuredTerm, //10, 15...
         insuredAmount,
         income,
-        type, // endowment/ termlife/ ...
+        type: (type ==1 | type ==2| type==3)?type:0, // endowment/ termlife/ ...
         gender,
         phoneNumber,
         dob,
@@ -200,9 +200,9 @@ export default function Compare() {
                   Female
                 </span>
                 <span id="type">
-                  <input type="radio" name="type" value="Endowment" /> Endowment
-                  <input type="radio" name="type" value="TermLife" /> Term Life
-                  <input type="radio" name="type" value="MoneyBack" /> Money
+                  <input type="radio" name="type" value="1" /> Endowment
+                  <input type="radio" name="type" value="2" /> Term Life
+                  <input type="radio" name="type" value="3" /> Money
                   Back
                 </span>
 
