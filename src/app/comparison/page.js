@@ -29,13 +29,13 @@ function calculateAge(dob) {
 //this Fxn works....better leave it that way
 
 export default function Compare() {
-  const [showThisPage, setShowThisPage] = useState(true);
+  const [showComparisonPage, setShowComparisonPage] = useState(true);
 
   const [csvData, setCsvData] = useState([]);
   const [comparisonResult, setComparisonResult] = useState("");
 
   function handleButtonClick(data) {
-    setShowThisPage(!showThisPage);
+    setShowComparisonPage(!showComparisonPage);
     getData(data);
   }
 
@@ -129,7 +129,7 @@ export default function Compare() {
 
   return (
     <>
-      {showThisPage ? (
+      {showComparisonPage ? (
         <div id="compareContainer">
           <div className="compareContents" id="searchPlans">
             <h1>
@@ -235,7 +235,14 @@ export default function Compare() {
           <div id="chooseBreak"></div>
         </div>
       ) : (
-        <DataFilter data={formData} /> // Render the DisplayData component
+        <>
+          <div id="majorView">
+            <nav id="filter">
+
+            </nav>
+            <DataFilter data={formData} />
+          </div>
+        </>
       )}
     </>
   );
