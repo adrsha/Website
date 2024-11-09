@@ -1,5 +1,6 @@
 //core backend.....contains interface to userData, filter through multiple policies, contains multiple premium results to be passed to display page
 
+
 "use client";
 import { CalculatePremiumLic } from "./premiumCalculation";
 import { useEffect, useState } from "react";
@@ -58,6 +59,7 @@ export default function DataFilter({ data }) {
       tabrate: 2,
     });
     console.log(insuredAmt, term, mode, yly, "from DataFilter file");
+    
   }, [data]);
   return (
     <div>
