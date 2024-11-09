@@ -92,6 +92,7 @@ span#term {
 span#gender::before {
   content: "Gender";
 }
+
 span#term::before {
   content: "Term";
 }
@@ -164,4 +165,46 @@ div.surrounddatafields {
   display: flex;
   justify-content: center;
   background-color: var(--primary);
+}
+
+#filter {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 1vw;
+  padding-top: 10vh;
+  font-weight: 500;
+}
+
+.filterAddons input {
+  display: none;
+}
+
+.filterAddons label {
+  padding: 0.5vw;
+  transition: 0.2s ease-in-out;
+  border-radius: 0.5vw;
+}
+
+.filterAddons label:hover {
+  background-color: var(--primary);
+}
+
+.filterAddons input:checked+label {
+  background-color: var(--secondary);
+  color: var(--palewhite);
+}
+
+.filterAddons {
+  border-left: 1px solid var(--light);
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
+}
+
+
+.filterAddons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1vw;
 }

@@ -1,22 +1,22 @@
-Add-on Number,Add-on Name
-1,Accidental Death Benefit
-2,Stormrider
-3(i),Critical Illness Payout
-3(ii),Critical Illness No Premium Pay
-4,Spouse Rider
-5(i),Disability Payout
-5(ii),Disability No Premium Pay
-6,Child Education Rider
-7,Hospital Rider
-8,Time Extension Rider
-9,Funeral Expense Rider
-10,Employment Loss No Premium Rider
-11,Travel Add-on
-12,Premium Return in Term Life
-A,Loan Against Insured Amount
-B,Grace Period for Pay
-C,Discount for Salaried Employees
-D,Online Discount
-E,Free Annual Health Checkup Whole Body
-F,Free Lookup Period
-G,Policy Conversion
+Add-on Number,Add-on Name,Free or paid
+1,Accidental Death Benefit,free
+2,Stormrider,free
+3.1,Critical Illness Payout,free
+3.2,Critical Illness No Premium Pay,free
+4,Spouse Rider,free
+5.1,Disability Payout,free
+5.2,Disability No Premium Pay,free
+6,Child Education Rider,free
+7,Hospital Rider,free
+8,Time Extension Rider,free
+9,Funeral Expense Rider,free
+10,Employment Loss No Premium Rider,free
+11,Travel Add-on,free
+12,Premium Return in Term Life,free
+65,Loan Against Insured Amount,paid
+66,Grace Period for Pay,paid
+67,Discount for Salaried Employees,paid
+68,Online Discount,paid
+69,Free Annual Health Checkup Whole Body,paid
+70,Free Lookup Period,paid
+71,Policy Conversion,paid

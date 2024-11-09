@@ -32,6 +32,7 @@ export default function Compare() {
   const [showComparisonPage, setShowComparisonPage] = useState(true);
 
   const [csvData, setCsvData] = useState([]);
+  const [addonNames, setAddonNames] = useState([]);
   const [comparisonResult, setComparisonResult] = useState("");
 
   function handleButtonClick(data) {
@@ -41,16 +42,17 @@ export default function Compare() {
 
   const [formData, setFormData] = useState({
     name: "",
-    dob: "",
+    age: "",
     insuredAmount: "",
     income: "",
-    type: "",
-    gender: "",
-    phoneNumber: "",
-    dob: "",
+    // type: "",
+    // gender: "",
+    // phoneNumber: "",
+    // dob: "",
     insuredTerm: "",
-    occupation: "",
+    // occupation: "",
   });
+
 
   function getData(data) {
     const nameElement = document.getElementById("nameField");
@@ -61,6 +63,7 @@ export default function Compare() {
     const gender = document.querySelector(
       'input[name="gender"]:checked',
     )?.value;
+
     const type = document.querySelector('input[name="type"]:checked')?.value;
     const dob =
       nameElement.parentElement.parentElement.children[1].children[3].value;
@@ -99,38 +102,45 @@ export default function Compare() {
     let term = document.getElementById("preselect"); //for default checkbox
     term.click();
 
-    fetch("/lic/Endowment/parameters.csv")
+    fetch("/AllPolicy/filter.csv")
       .then((response) => response.text())
       .then((csvText) => {
         const result = papa.parse(csvText, { header: false });
         setCsvData(result.data);
       })
       .catch((error) => console.error("Error fetching CSV:", error));
+
+    fetch("/AllPolicy/addons_names.csv")
+      .then((response) => response.text())
+      .then((csvText) => {
+        const result = papa.parse(csvText, { header: true });
+        setAddonNames(result.data);
+      })
+      .catch((error) => console.error("Error fetching CSV:", error));
   }, []);
 
   //activates each time csvData fetch from file and formData from user changes
-  useEffect(() => {
-    if (csvData.length > 0) {
-      compareFormWithCSV();
-    }
-  }, [formData, csvData]);
+  // useEffect(() => {
+  //   if (csvData.length > 0) {
+  //     compareFormWithCSV();
+  //   }
+  // }, [formData, csvData]);
 
   //compares the formData with csvData
-  const compareFormWithCSV = () => {
-    //console.log(csvData)
-    const match = csvData.find((row) => console.log(formData));
-
-    if (match) {
-      setComparisonResult("Match found in CSV!");
-    } else {
-      setComparisonResult("No match found in CSV.");
-    }
-  };
+  // const compareFormWithCSV = () => {
+  //   const match = csvData.find((row) => console.log(formData));
+  //
+  //   if (match) {
+  //     setComparisonResult("Match found in CSV!");
+  //   } else {
+  //     setComparisonResult("No match found in CSV.");
+  //   }
+  // };
 
   return (
     <>
       {showComparisonPage ? (
-        <div id="compareContainer">
+        < div id="compareContainer">
           <div className="compareContents" id="searchPlans">
             <h1>
               <span id="searchSpan">Search</span>
@@ -233,17 +243,29 @@ export default function Compare() {
           </div>
 
           <div id="chooseBreak"></div>
-        </div>
+        </div >
       ) : (
         <>
           <div id="majorView">
             <nav id="filter">
-
+              {
+                addonNames.map((addon, index) => {
+                  if (addon["Add-on Number"] != "") {
+                    return (
+                      <div key={index} class="filterAddons">
+                        <input type="checkbox" name={addon["Add-on Name"]} id={addon["Add-on Number"]} />
+                        <label for={addon["Add-on Number"]}>{addon["Add-on Name"]}</label>
+                      </div>
+                    );
+                  }
+                })
+              }
             </nav>
             <DataFilter data={formData} />
           </div>
         </>
-      )}
+      )
+      }
     </>
   );
 }
