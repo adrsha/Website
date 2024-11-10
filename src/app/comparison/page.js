@@ -247,6 +247,7 @@ export default function Compare() {
       ) : (
         <>
           <div id="majorView">
+            <div id="filterinfoicon">ⓘ<span id="filterinfo">Click on a addon to filter the policies</span></div>
             <nav id="filter">
               {
                 addonNames.map((addon, index) => {

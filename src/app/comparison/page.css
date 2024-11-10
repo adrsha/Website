@@ -167,13 +167,17 @@ div.surrounddatafields {
   background-color: var(--primary);
 }
 
+#majorView {
+  padding-top: 13vh;
+  font-weight: 500;
+}
+
 #filter {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 1vw;
-  padding-top: 10vh;
-  font-weight: 500;
+  color: var(--secondary);
 }
 
 .filterAddons input {
@@ -188,6 +192,7 @@ div.surrounddatafields {
 
 .filterAddons label:hover {
   background-color: var(--primary);
+  color: var(--palewhite);
 }
 
 .filterAddons input:checked+label {
@@ -201,6 +206,23 @@ div.surrounddatafields {
   padding-right: 0.5vw;
 }
 
+#filterinfoicon {
+  font-size: 1rem;
+  color: var(--tertiary);
+  opacity: 0.5;
+  font-weight: 600;
+  padding-left: 1vw;
+}
+
+#filterinfoicon:hover span#filterinfo {
+  opacity: 1;
+}
+
+#filterinfoicon span#filterinfo {
+  opacity: 0;
+  padding-left: 0.5vw;
+  transition: 0.2s ease-in-out;
+}
 
 .filterAddons {
   display: flex;
