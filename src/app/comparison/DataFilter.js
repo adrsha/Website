@@ -1,6 +1,3 @@
-//core backend.....contains interface to userData, filter through multiple policies, contains multiple premium results to be passed to display page
-
-
 
 "use client";
 import { useEffect } from "react";
