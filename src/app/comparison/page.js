@@ -3,6 +3,7 @@ import "./page.css";
 import { Children } from "react";
 import { useEffect, useState } from "react";
 import papa from "papaparse";
+import filteredPolicies from "./DataFilter";
 import { row } from "mathjs";
 import DisplayData from "./DataFilter";
 import DataFilter from "./DataFilter";
@@ -262,8 +263,10 @@ export default function Compare() {
                 })
               }
             </nav>
-            <DataFilter data={formData} />
           </div>
+          {
+            filteredPolicies
+          }
         </>
       )
       }
