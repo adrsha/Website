@@ -3,29 +3,10 @@ import "./page.css";
 import { Children } from "react";
 import { useEffect, useState } from "react";
 import papa from "papaparse";
-import filteredPolicies from "./DataFilter";
 import { row } from "mathjs";
-import DisplayData from "./DataFilter";
 import DataFilter from "./DataFilter";
 
 //just simple fxn to calculate age from date
-function calculateAge(dob) {
-  const birthDate = new Date(dob);
-  const today = new Date();
-
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const monthDifference = today.getMonth() - birthDate.getMonth();
-
-  // Adjust age if the birthday hasn't occurred yet this year
-  if (
-    monthDifference < 0 ||
-    (monthDifference === 0 && today.getDate() < birthDate.getDate())
-  ) {
-    age--;
-  }
-
-  return age;
-}
 
 //this Fxn works....better leave it that way
 
@@ -34,11 +15,11 @@ export default function Compare() {
 
   const [csvData, setCsvData] = useState([]);
   const [addonNames, setAddonNames] = useState([]);
-  const [comparisonResult, setComparisonResult] = useState("");
+  const [comparisonResult, setComparisonResult] = useState([]);
 
-  function handleButtonClick(data) {
+  function handleButtonClick(_) {
     setShowComparisonPage(!showComparisonPage);
-    getData(data);
+    getData();
   }
 
   const [formData, setFormData] = useState({
@@ -55,7 +36,7 @@ export default function Compare() {
   });
 
 
-  function getData(data) {
+  function getData() {
     const nameElement = document.getElementById("nameField");
     const insuredTerm = nameElement.parentElement.children[1].value;
     const insuredAmount = nameElement.parentElement.children[2].value;
@@ -66,11 +47,11 @@ export default function Compare() {
     )?.value;
 
     const type = document.querySelector('input[name="type"]:checked')?.value;
-    const dob =
+    const age =
       nameElement.parentElement.parentElement.children[1].children[3].value;
     if (
       nameElement.value != "" &&
-      dob != "" &&
+      age != "" &&
       insuredAmount != "" &&
       income != "" &&
       insuredTerm != "" &&
@@ -91,7 +72,7 @@ export default function Compare() {
         type: (type == 1 | type == 2 | type == 3) ? type : 0, // endowment/ termlife/ ...
         gender,
         phoneNumber,
-        dob,
+        age,
         term, //yly, hly, mly,...
         occupation,
       });
@@ -120,23 +101,33 @@ export default function Compare() {
       .catch((error) => console.error("Error fetching CSV:", error));
   }, []);
 
-  //activates each time csvData fetch from file and formData from user changes
+  // activates each time csvData fetch from file and formData from user changes
   // useEffect(() => {
-  //   if (csvData.length > 0) {
-  //     compareFormWithCSV();
-  //   }
-  // }, [formData, csvData]);
-
-  //compares the formData with csvData
-  // const compareFormWithCSV = () => {
-  //   const match = csvData.find((row) => console.log(formData));
+  //   console.log(formData)
+  //   if (formData.name != "") {
+  //     let filteredData = DataFilter(formData)
+  //     let tab;
+  //     let premium;
+  //     for (let i = 0; i < filteredData.length; i++) {
   //
-  //   if (match) {
-  //     setComparisonResult("Match found in CSV!");
-  //   } else {
-  //     setComparisonResult("No match found in CSV.");
+  //       let loadingCharge = 0.3
+  //       let insuranceRebate = 20000
+  //       fetch(`/AllPolicy/${filteredData[i].policy}.csv`)
+  //         .then((response) => response.text())
+  //         .then((csvText) => {
+  //           tab = papa.parse(csvText, { header: true }).data
+  //           console.log("tab", tab)
+  //           premium = (tab[filteredData[i].age - filteredData[i].minEntry][filteredData[i].insuredTerm - filteredData[i].minYears] * loadingCharge - insuranceRebate) * filteredData[i].insuredAmount / 1000;
+  //           filteredData.premium = premium
+  //           console.log(filteredData)
+  //         })
+  //         .catch((error) => console.error("Error fetching CSV:", error));
+  //     }
+  //
+  //     setComparisonResult(filteredData);
   //   }
-  // };
+  // }, [formData]);
+
 
   return (
     <>
@@ -254,9 +245,9 @@ export default function Compare() {
                 addonNames.map((addon, index) => {
                   if (addon["Add-on Number"] != "") {
                     return (
-                      <div key={index} class="filterAddons">
+                      <div key={index} className="filterAddons">
                         <input type="checkbox" name={addon["Add-on Name"]} id={addon["Add-on Number"]} />
-                        <label for={addon["Add-on Number"]}>{addon["Add-on Name"]}</label>
+                        <label htmlFor={addon["Add-on Number"]}>{addon["Add-on Name"]}</label>
                       </div>
                     );
                   }
@@ -265,7 +256,13 @@ export default function Compare() {
             </nav>
           </div>
           {
-            filteredPolicies
+            comparisonResult.map((policy, index) => {
+              return (
+                <div key={index} className="filteredPolicies">
+                  {policy["policy"]}
+                </div>
+              );
+            })
           }
         </>
       )

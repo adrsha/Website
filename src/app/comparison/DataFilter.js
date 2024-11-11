@@ -1,25 +1,31 @@
 "use client";
 import { useEffect } from "react";
 
-export default function DataFilter({ data }) {
+export default function DataFilter(data) {
   // Log all user data to check what is being passed from page.js
-  console.log("User data before filtering:", data);
+  // console.log("User data before filtering:", data);
 
   // Convert relevant fields from string to number for proper comparison
-  const { age, income, insuredTerm, type, dob, insuredAmount } = data;
+  const age = data.age;
+  const income = data.income;
+  const insuredTerm = data.insuredTerm;
+  const type = data.type;
+  const insuredAmount = data.insuredAmount;
+  // const {
+  //   age,
+  //   income,
+  //   insuredTerm,
+  //   type,
+  //   insuredAmount,
+  // ) = ( data["age"], data["income"], data["insuredTerm"], data["type"], data["insuredAmount"] };
 
   // Convert to number where necessary
-  const userAge = Number(dob); // Convert to number, fallback to dob if age is missing
+  const userAge = Number(age); // Convert to number, fallback to dob if age is missing
   const userIncome = Number(income); // Convert income to number
   const userInsuredTerm = Number(insuredTerm); // Convert insuredTerm to number
   const userType = Number(type); // Convert type to number if needed
   const userInsuredAmount = Number(insuredAmount); // New insuredAmount field
 
-  console.log("User Age:", userAge);
-  console.log("User Income:", userIncome);
-  console.log("User Insured Term:", userInsuredTerm);
-  console.log("User Type:", userType);
-  console.log("User Insured Amount:", userInsuredAmount);
 
   const policies = [
     { policy: 1, min: 200000, max: 5000000, minEntry: 18, maxEntry: 60, minYears: 5, maxYears: (age) => Math.min(70 - age, 52) },
@@ -31,22 +37,22 @@ export default function DataFilter({ data }) {
     { policy: 7, min: 300000, max: 9000000, minEntry: 20, maxEntry: 60, minYears: 5, maxYears: (age) => Math.min(70 - age, 50) },
     { policy: 8, min: 250000, max: 7000000, minEntry: 20, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(70 - age, 50) },
     { policy: 9, min: 300000, max: 10000000, minEntry: 20, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(70 - age, 45) },
-    { policy: 10, min: 500000, max: 15000000, minEntry: 18, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(65 - age, 40), exactTerms: [15, 20, 25] },
-    { policy: 11, min: 400000, max: 12000000, minEntry: 18, maxEntry: 60, minYears: 5, maxYears: (age) => Math.min(65 - age, 35), exactTerms: [15, 20, 25] },
-    { policy: 12, min: 600000, max: 16000000, minEntry: 20, maxEntry: 50, minYears: 10, maxYears: (age) => Math.min(60 - age, 30), exactTerms: [15, 20, 25] },
-    { policy: 13, min: 350000, max: 10000000, minEntry: 20, maxEntry: 60, minYears: 5, maxYears: (age) => Math.min(65 - age, 25), exactTerms: [15, 20, 25] },
-    { policy: 14, min: 450000, max: 13000000, minEntry: 18, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(65 - age, 30), exactTerms: [15, 20, 25] },
-    { policy: 15, min: 500000, max: 14000000, minEntry: 21, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(60 - age, 35), exactTerms: [15, 20, 25] },
-    { policy: 16, min: 400000, max: 12000000, minEntry: 18, maxEntry: 60, minYears: 5, maxYears: (age) => Math.min(55 - age, 20) },
-    { policy: 17, min: 250000, max: 9000000, minEntry: 20, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(60 - age, 25) },
-    { policy: 18, min: 350000, max: 10000000, minEntry: 18, maxEntry: 50, minYears: 10, maxYears: (age) => Math.min(60 - age, 20) },
-    { policy: 19, min: 300000, max: 8500000, minEntry: 20, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(60 - age, 25) },
-    { policy: 20, min: 500000, max: 12000000, minEntry: 21, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(55 - age, 15) },
-    { policy: 21, min: 600000, max: 13000000, minEntry: 18, maxEntry: 60, minYears: 5, maxYears: (age) => Math.min(60 - age, 20) },
+    // { policy: 10, min: 500000, max: 15000000, minEntry: 18, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(65 - age, 40), exactTerms: [15, 20, 25] },
+    // { policy: 11, min: 400000, max: 12000000, minEntry: 18, maxEntry: 60, minYears: 5, maxYears: (age) => Math.min(65 - age, 35), exactTerms: [15, 20, 25] },
+    // { policy: 12, min: 600000, max: 16000000, minEntry: 20, maxEntry: 50, minYears: 10, maxYears: (age) => Math.min(60 - age, 30), exactTerms: [15, 20, 25] },
+    // { policy: 13, min: 350000, max: 10000000, minEntry: 20, maxEntry: 60, minYears: 5, maxYears: (age) => Math.min(65 - age, 25), exactTerms: [15, 20, 25] },
+    // { policy: 14, min: 450000, max: 13000000, minEntry: 18, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(65 - age, 30), exactTerms: [15, 20, 25] },
+    // { policy: 15, min: 500000, max: 14000000, minEntry: 21, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(60 - age, 35), exactTerms: [15, 20, 25] },
+    // { policy: 16, min: 400000, max: 12000000, minEntry: 18, maxEntry: 60, minYears: 5, maxYears: (age) => Math.min(55 - age, 20) },
+    // { policy: 17, min: 250000, max: 9000000, minEntry: 20, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(60 - age, 25) },
+    // { policy: 18, min: 350000, max: 10000000, minEntry: 18, maxEntry: 50, minYears: 10, maxYears: (age) => Math.min(60 - age, 20) },
+    // { policy: 19, min: 300000, max: 8500000, minEntry: 20, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(60 - age, 25) },
+    // { policy: 20, min: 500000, max: 12000000, minEntry: 21, maxEntry: 55, minYears: 5, maxYears: (age) => Math.min(55 - age, 15) },
+    // { policy: 21, min: 600000, max: 13000000, minEntry: 18, maxEntry: 60, minYears: 5, maxYears: (age) => Math.min(60 - age, 20) },
   ];
 
   // Log the policies before filtering
-  console.log("Policies before filtering:", policies);
+  // console.log("Policies before filtering:", policies);
 
   const filteredPolicies = policies
     .filter((policy) => {
@@ -58,7 +64,7 @@ export default function DataFilter({ data }) {
     })
     .filter((policy) => {
       // Apply age, insured amount, and term filters
-      const maxYearsAllowed = typeof policy.maxYears === "function" ? policy.maxYears(userAge) : policy.maxYears;
+      const maxYearsAllowed = policy.maxYears(userAge);
       return (
         userAge >= policy.minEntry &&
         userAge <= policy.maxEntry &&
@@ -70,7 +76,7 @@ export default function DataFilter({ data }) {
     });
 
   // Log filtered policies to see which are available
-  console.log("Available Policies after Filtering:", filteredPolicies);
+  // console.log("Available Policies after Filtering:", filteredPolicies);
 
   return filteredPolicies
 }
