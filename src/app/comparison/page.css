@@ -230,11 +230,3 @@ div.surrounddatafields {
   align-items: center;
   gap: 1vw;
 }
-
-.filteredPolicies {
-  margin: 0.2vw;
-  padding: 1vw;
-  border-radius: 2vw;
-  width: 70%;
-  background-color: var(--secondaryA);
-}
