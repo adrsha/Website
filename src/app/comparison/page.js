@@ -102,31 +102,30 @@ export default function Compare() {
   }, []);
 
   // activates each time csvData fetch from file and formData from user changes
-  // useEffect(() => {
-  //   console.log(formData)
-  //   if (formData.name != "") {
-  //     let filteredData = DataFilter(formData)
-  //     let tab;
-  //     let premium;
-  //     for (let i = 0; i < filteredData.length; i++) {
-  //
-  //       let loadingCharge = 0.3
-  //       let insuranceRebate = 20000
-  //       fetch(`/AllPolicy/${filteredData[i].policy}.csv`)
-  //         .then((response) => response.text())
-  //         .then((csvText) => {
-  //           tab = papa.parse(csvText, { header: true }).data
-  //           console.log("tab", tab)
-  //           premium = (tab[filteredData[i].age - filteredData[i].minEntry][filteredData[i].insuredTerm - filteredData[i].minYears] * loadingCharge - insuranceRebate) * filteredData[i].insuredAmount / 1000;
-  //           filteredData.premium = premium
-  //           console.log(filteredData)
-  //         })
-  //         .catch((error) => console.error("Error fetching CSV:", error));
-  //     }
-  //
-  //     setComparisonResult(filteredData);
-  //   }
-  // }, [formData]);
+  useEffect(() => {
+    console.log(formData)
+    if (formData.name != "") {
+      let filteredData = DataFilter(formData)
+      let tab;
+      let premium;
+      for (let i = 0; i < filteredData.length; i++) {
+
+        let loadingCharge = 0.3
+        let insuranceRebate = 20000
+
+        fetch(`/AllPolicy/${filteredData[i].policy}.csv`)
+          .then((response) => response.text())
+          .then((csvText) => {
+            tab = papa.parse(csvText, { header: true }).data
+            premium = (tab[formData.age - filteredData[i].minEntry][formData.insuredTerm] * loadingCharge - insuranceRebate) * formData.insuredAmount / 1000;
+            filteredData[i].premium = premium
+          })
+          .catch((error) => console.error("Error fetching CSV:", error));
+      }
+
+      setComparisonResult(filteredData);
+    }
+  }, [formData]);
 
 
   return (
@@ -259,7 +258,8 @@ export default function Compare() {
             comparisonResult.map((policy, index) => {
               return (
                 <div key={index} className="filteredPolicies">
-                  {policy["policy"]}
+                  <h1>{policy["policy"]}</h1>
+                  Premium: {policy["premium"]}. CSR: {}. Addons:{}
                 </div>
               );
             })
